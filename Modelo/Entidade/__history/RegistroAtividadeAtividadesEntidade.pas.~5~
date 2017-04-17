@@ -1,0 +1,19 @@
+unit RegistroAtividadeAtividadesEntidade;
+
+interface
+  type
+    TRegistroAtividadeAtividadesEntidade = class
+      private
+        FCodigo: Integer;
+        FCodigoRegistroAtividade: integer;
+        FAtividade: TAtividadeEntidade;
+        FDataAtividade: TDate;
+        FProduto: TProdutoEntidade;
+        FQuantidade: double;
+        FUnidade: AnsiString;
+
+      public
+    end;
+implementation
+
+end.

@@ -1,0 +1,15 @@
+unit ComandoSQLEntidade;
+
+interface
+  type
+    TComandoSQLEntidade = class
+      private
+        FConexao: TADOConnection;
+        FComandoSQL: String;
+        FParametros: TList<WideString>;
+        FValores: TList<Variant>;
+      public
+    end;
+implementation
+
+end.

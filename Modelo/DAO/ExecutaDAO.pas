@@ -1,0 +1,55 @@
+unit ExecutaDAO;
+
+interface
+
+uses
+  ADODB, ComandoSQLEntidade, AtividadeEntidade;
+
+  type
+    TExecutaDAO = class
+      private
+        Conexao: TADOConnection;
+        ComandoSQL: TComandoSQLEntidade;
+      public
+        constructor Create(var Conexao: TADOConnection; ComandoSQL: TComandoSQLEntidade);
+        function ExecutaSalvarAlterarExcluir(var Retorno: AnsiString): integer;
+        function Buscar(var Query: TADOQuery; var Retorno: AnsiString): integer;
+    end;
+implementation
+
+uses
+  ExecutaComandosSQLDominio;
+
+{ TAtividadeDAO }
+
+function TExecutaDAO.Buscar(var Query: TADOQuery; var Retorno: AnsiString): integer;
+var
+  FComandoSQLDominio: TExecutaComandosSQLDominio;
+begin
+  try
+    FComandoSQLDominio:= TExecutaComandosSQLDominio.Create(ComandoSQL);
+    Result:= FComandoSQLDominio.ExecutaComandoSQLRetornaADOQuery(Query, Retorno);
+  finally
+
+  end;
+end;
+
+constructor TExecutaDAO.Create(var Conexao: TADOConnection; ComandoSQL: TComandoSQLEntidade);
+begin
+  Self.Conexao:= Conexao;
+  Self.ComandoSQL:= ComandoSQL;
+end;
+
+function TExecutaDAO.ExecutaSalvarAlterarExcluir(var Retorno: AnsiString): integer;
+var
+  FComandoSQLDominio: TExecutaComandosSQLDominio;
+begin
+  try
+    FComandoSQLDominio:= TExecutaComandosSQLDominio.Create(ComandoSQL);
+    Result:= FComandoSQLDominio.ExecutaComandoSQLSalvarAlterarExcluir(Retorno);
+  finally
+
+  end;
+end;
+
+end.

@@ -1,0 +1,409 @@
+unit UDados_Meteorologicos;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, ToolWin, ImgList, Mask, StdCtrls, ADODB, DB, Grids, DBGrids, ExtCtrls,
+  URegistro, UUtilitarios;
+
+type
+  TFrmDados_Meteorologicos = class(TForm)
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TlbFerramentas: TToolBar;
+    BBtnSalvar: TToolButton;
+    BBtnExcluir: TToolButton;
+    BBtnCancelar: TToolButton;
+    BBtnFechar: TToolButton;
+    LblCodigo: TLabel;
+    EdtCodigo: TEdit;
+    MEdtData_Cadastro: TMaskEdit;
+    LblData_Cadastro: TLabel;
+    BBtnPesquisar: TToolButton;
+    LblMarca: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    EdtQuantidade_Chuva: TEdit;
+    EdtUmidade_Minima: TEdit;
+    EdtUmidade_Maxima: TEdit;
+    EdtTemperatura_Minima: TEdit;
+    EdtTemperatura_Maxima: TEdit;
+    MmObservacao: TMemo;
+    BBtnNovo: TToolButton;
+    procedure BBtnSalvarClick(Sender: TObject);
+    procedure BBtnFecharClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
+    procedure BBtnCancelarClick(Sender: TObject);
+    procedure MEdtData_CadastroEnter(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure BBtnExcluirClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure MEdtData_CadastroExit(Sender: TObject);
+    procedure BBtnPesquisarClick(Sender: TObject);
+    procedure EdtQuantidade_ChuvaKeyPress(Sender: TObject; var Key: Char);
+    procedure EdtUmidade_MinimaKeyPress(Sender: TObject; var Key: Char);
+    procedure EdtUmidade_MaximaKeyPress(Sender: TObject; var Key: Char);
+    procedure EdtTemperatura_MinimaKeyPress(Sender: TObject; var Key: Char);
+    procedure EdtTemperatura_MaximaKeyPress(Sender: TObject; var Key: Char);
+    procedure EdtQuantidade_ChuvaExit(Sender: TObject);
+    procedure EdtUmidade_MinimaExit(Sender: TObject);
+    procedure EdtUmidade_MaximaExit(Sender: TObject);
+    procedure EdtTemperatura_MinimaExit(Sender: TObject);
+    procedure EdtTemperatura_MaximaExit(Sender: TObject);
+    procedure BBtnNovoClick(Sender: TObject);
+  private
+    Util: TUtil;
+    Padrao: TDados_Meteorologicos;
+    Mensagem: TMensagem;
+    iniciado: boolean;
+    function Confira: boolean; virtual;
+    procedure Gera_Codigo;
+  public
+    ativo, enderec, achei: boolean;
+  protected
+  end;
+
+var
+  FrmDados_Meteorologicos: TFrmDados_Meteorologicos;
+implementation
+
+uses UDM, UChama_Dados_Meteorologicos;
+
+{$R *.dfm}
+
+{ TFrmPadrao }
+
+procedure TFrmDados_Meteorologicos.BBtnCancelarClick(Sender: TObject);
+begin
+  Util.Limpa_Campos(FrmDados_Meteorologicos);
+  Util.Desabilita_Campos(FrmDados_Meteorologicos);
+  BBtnSalvar.Enabled:= false;
+  BBtnExcluir.Enabled:= false;
+  BBtnPesquisar.Enabled:= true;
+  BBtnCancelar.Enabled:= false;
+  iniciado:= false;
+end;
+
+procedure TFrmDados_Meteorologicos.BBtnExcluirClick(Sender: TObject);
+begin
+  if (Mensagem.Confirma_Exclusao = true) then
+  begin
+    try
+      Padrao.Excluir;
+      Mensagem.Exclusao_Realizada;
+      Util.Insere_Historico(usuario, 'EXCLUIU DADOS METEOROLÓGICOS DO DIA ' + MEdtData_Cadastro.Text + '.', TimeToStr(time), exclusao, date);
+    except
+      Mensagem.Impossivel_Executar;
+    end;
+
+    BBtnSalvar.Enabled:= false;
+    BBtnExcluir.Enabled:= false;
+    BBtnPesquisar.Enabled:= true;
+    BBtnCancelar.Enabled:= false;
+    iniciado:= false;
+    Util.Desabilita_Campos(FrmDados_Meteorologicos);
+  end;
+end;
+
+procedure TFrmDados_Meteorologicos.BBtnFecharClick(Sender: TObject);
+begin
+  if BBtnSalvar.Enabled = true then
+    begin
+      Mensagem.Cancele;
+    end
+  else
+    Close;
+end;
+
+procedure TFrmDados_Meteorologicos.BBtnPesquisarClick(Sender: TObject);
+begin
+  Application.CreateForm(TFrmChama_Dados_Meteorologicos, FrmChama_Dados_Meteorologicos);
+  FrmChama_Dados_Meteorologicos.ShowModal;
+  FrmChama_Dados_Meteorologicos.Free;
+end;
+
+procedure TFrmDados_Meteorologicos.BBtnSalvarClick(Sender: TObject);
+begin
+  if (achei = false) then
+    begin
+      if (Confira = true) then
+      begin
+        Gera_Codigo;
+        try
+          Padrao.Inserir;
+          Mensagem.Confirma_Insercao;
+          Util.Insere_Historico(usuario, 'CADASTROU DADOS METEOROLÓGICOS DO DIA ' + MEdtData_Cadastro.Text + '.', TimeToStr(time), insercao, date);
+        except
+          Mensagem.Impossivel_Executar;
+        end;
+      end
+      else
+        exit;
+    end
+    else
+    begin
+      if (Confira = true) then
+      begin
+      try
+        Padrao.Alterar;
+        Mensagem.Alteracao_Realizada;
+        Util.Insere_Historico(usuario, 'ALTEROU DADOS METEOROLÓGICOS DO DIA ' + MEdtData_Cadastro.Text + '.', TimeToStr(time), alteracao, date);
+      except
+        Mensagem.Impossivel_Executar;
+      end;
+      end
+      else
+        exit;
+    end;
+    BBtnSalvar.Enabled:= false;
+    BBtnExcluir.Enabled:= false;
+    BBtnPesquisar.Enabled:= true;
+    BBtnCancelar.Enabled:= false;
+    iniciado:= false;
+    Util.Desabilita_Campos(FrmDados_Meteorologicos);
+end;
+
+function TFrmDados_Meteorologicos.Confira: boolean;
+begin
+  Confira:= false;
+
+  if EdtQuantidade_Chuva.Text = '' then
+  begin
+    Mensagem.Mensagem_Falta_Dados;
+    EdtQuantidade_Chuva.SetFocus;
+    abort;
+  end;
+
+  if EdtUmidade_Minima.Text = '' then
+  begin
+    Mensagem.Mensagem_Falta_Dados;
+    EdtUmidade_Minima.SetFocus;
+    abort;
+  end;
+
+  if EdtUmidade_Maxima.Text = '' then
+  begin
+    Mensagem.Mensagem_Falta_Dados;
+    EdtUmidade_Maxima.SetFocus;
+    abort;
+  end;
+
+  if EdtTemperatura_Minima.Text = '' then
+  begin
+    Mensagem.Mensagem_Falta_Dados;
+    EdtTemperatura_Minima.SetFocus;
+    abort;
+  end;
+
+  if EdtTemperatura_Maxima.Text = '' then
+  begin
+    Mensagem.Mensagem_Falta_Dados;
+    EdtTemperatura_Maxima.SetFocus;
+    abort;
+  end;
+
+  Confira:= true;
+end;
+
+procedure TFrmDados_Meteorologicos.EdtQuantidade_ChuvaExit(Sender: TObject);
+begin
+  if (EdtQuantidade_Chuva.Text = '') then
+  begin
+    Mensagem.Qtde_Invalida;
+    EdtQuantidade_Chuva.SetFocus;
+    abort;
+  end;
+end;
+
+procedure TFrmDados_Meteorologicos.EdtQuantidade_ChuvaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Util.Somente_Numero_Virgula(key);
+end;
+
+procedure TFrmDados_Meteorologicos.EdtTemperatura_MaximaExit(Sender: TObject);
+begin
+  if (EdtTemperatura_Maxima.Text = '') then
+  begin
+    Mensagem.Qtde_Invalida;
+    EdtTemperatura_Maxima.SetFocus;
+    abort;
+  end;
+end;
+
+procedure TFrmDados_Meteorologicos.EdtTemperatura_MaximaKeyPress(
+  Sender: TObject; var Key: Char);
+begin
+  Util.Somente_Numero_Virgula(key);
+end;
+
+procedure TFrmDados_Meteorologicos.EdtTemperatura_MinimaExit(Sender: TObject);
+begin
+  if (EdtTemperatura_Minima.Text = '') then
+  begin
+    Mensagem.Qtde_Invalida;
+    EdtTemperatura_Minima.SetFocus;
+    abort;
+  end;
+end;
+
+procedure TFrmDados_Meteorologicos.EdtTemperatura_MinimaKeyPress(
+  Sender: TObject; var Key: Char);
+begin
+  Util.Somente_Numero_Virgula(key);
+end;
+
+procedure TFrmDados_Meteorologicos.EdtUmidade_MaximaExit(Sender: TObject);
+begin
+  if (EdtUmidade_Maxima.Text = '') then
+  begin
+    Mensagem.Qtde_Invalida;
+    EdtUmidade_Maxima.SetFocus;
+    abort;
+  end;
+end;
+
+procedure TFrmDados_Meteorologicos.EdtUmidade_MaximaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Util.Somente_Numero_Virgula(key);
+end;
+
+procedure TFrmDados_Meteorologicos.EdtUmidade_MinimaExit(Sender: TObject);
+begin
+  if (EdtUmidade_Minima.Text = '') then
+  begin
+    Mensagem.Qtde_Invalida;
+    EdtUmidade_Minima.SetFocus;
+    abort;
+  end;
+end;
+
+procedure TFrmDados_Meteorologicos.EdtUmidade_MinimaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Util.Somente_Numero_Virgula(key);
+end;
+
+{procedure TFrmCadastro_Logradouro.Estado(const llEstado: Controle);
+begin
+  case llEstado of
+    Inserir: Habilita_Botao([false, true, false, true]);
+    //Alterar: Habilita_Botao([false, true, false, true]);
+    Consultar: Habilita_Botao([false, true, true, true]);
+  end;
+end;}
+
+procedure TFrmDados_Meteorologicos.FormActivate(Sender: TObject);
+begin
+  ativo:= true;
+end;
+
+procedure TFrmDados_Meteorologicos.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  if (BBtnCancelar.Enabled = true) then
+    begin
+      Mensagem.Cancele;
+      Abort;
+    end
+    else
+      begin
+        FrmDados_Meteorologicos.Free;
+        FrmDados_Meteorologicos:= Nil;
+      end;
+end;
+
+procedure TFrmDados_Meteorologicos.FormCreate(Sender: TObject);
+begin
+  Util.Habilita_Campos(FrmDados_Meteorologicos);
+  Util.Limpa_Campos(FrmDados_Meteorologicos);
+  Util.Desabilita_Campos(FrmDados_Meteorologicos);
+  iniciado:= false;
+end;
+
+procedure TFrmDados_Meteorologicos.FormDeactivate(Sender: TObject);
+begin
+  ativo:= false;
+end;
+
+procedure TFrmDados_Meteorologicos.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (key = vk_f2) then
+    begin
+    end;
+
+  if (key = vk_escape) then
+    close;
+end;
+
+procedure TFrmDados_Meteorologicos.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+    begin
+      key:=#0; //anula todas as teclas
+      SelectNext(ActiveControl, true, true);
+    end;
+end;
+
+procedure TFrmDados_Meteorologicos.Gera_Codigo;
+var
+  qAux: TADOQuery;
+  codigo: integer;
+begin
+  try
+    qAux:= TADOQuery.Create(nil);
+    with qAux, sql do
+    begin
+      close;
+      Connection:= dm.ADOConnection1;
+      clear;
+      add('select max(Codigo) as codigo from Dados_Meteorologicos');
+      open;
+    end;
+    codigo:= qAux.FieldByName('Codigo').AsInteger + 1;
+    EdtCodigo.Text:= IntToStr(codigo);
+  finally
+    FreeAndNil(qAux);
+  end;
+end;
+
+procedure TFrmDados_Meteorologicos.MEdtData_CadastroEnter(Sender: TObject);
+begin
+  MEdtData_Cadastro.Text:= DateToStr(date);
+end;
+
+procedure TFrmDados_Meteorologicos.MEdtData_CadastroExit(Sender: TObject);
+begin
+  if (MEdtData_Cadastro.Text = '  /  /    ') then
+    abort
+  else
+    Util.Verifica_Data(MEdtData_Cadastro);
+end;
+
+procedure TFrmDados_Meteorologicos.BBtnNovoClick(Sender: TObject);
+begin
+  if (iniciado = false) then
+  begin
+    Util.Habilita_Campos(FrmDados_Meteorologicos);
+    Util.Limpa_Campos(FrmDados_Meteorologicos);
+    BBtnSalvar.Enabled:= true;
+    BBtnExcluir.Enabled:= false;
+    BBtnPesquisar.Enabled:= false;
+    BBtnCancelar.Enabled:= true;
+    BBtnNovo.Enabled:= False;
+    achei:= false;
+    iniciado:= true;
+    MEdtData_Cadastro.SetFocus;
+  end;
+end;
+
+end.

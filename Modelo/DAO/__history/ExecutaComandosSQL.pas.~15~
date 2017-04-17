@@ -1,0 +1,57 @@
+unit ExecutaComandosSQL;
+
+interface
+
+uses
+  ComandoSQLEntidade, ADODB;
+  type
+    TExecutaComandosSQL = class
+      private
+        qAux: TADOQuery;
+        FComandoSQL: TComandoSQLEntidade;
+      public
+        function ExecutaComandoSQLSalvarAlterarExcluir: Integer;
+        function ExecutaComandoSQLRetornaADOQuery(var Query: TADOQuery): integer;
+        constructor Create(var FComando: TComandoSQLEntidade);
+    end;
+implementation
+
+{ TExecutaComandosSQL }
+
+constructor TExecutaComandosSQL.Create(var FComando: TComandoSQLEntidade);
+begin
+  FComandoSQL:= FComando;
+  qAux:= TADOQuery.Create(nil);
+end;
+
+function TExecutaComandosSQL.ExecutaComandoSQLRetornaADOQuery(
+  var Query: TADOQuery): integer;
+var
+  i: integer;
+begin
+  try
+    with Query, sql do
+    begin
+      close;
+      Clear;
+      Add(FComandoSQL.ComandoSQL);
+      if (FComandoSQL.Parametros.Count > 0) then
+      begin
+        for i := 0 to FComandoSQL.Parametros.Count-1 do
+        begin
+          Parameters.ParamByName(FComandoSQL.Parametros.Items[i]).Value:= FComandoSQL.Valores.Items[i];
+        end;
+      end;
+      open;
+      Result := 1;
+    end;
+  finally
+  end;
+end;
+
+function TExecutaComandosSQL.ExecutaComandoSQLSalvarAlterarExcluir: Integer;
+begin
+
+end;
+
+end.

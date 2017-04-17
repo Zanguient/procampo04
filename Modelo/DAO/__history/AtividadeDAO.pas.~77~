@@ -1,0 +1,61 @@
+unit AtividadeDAO;
+
+interface
+
+uses
+  ADODB, ComandoSQLEntidade, AtividadeEntidade;
+
+  type
+    TAtividadeDAO = class
+      private
+        Conexao: TADOConnection;
+        ComandoSQL: TComandoSQLEntidade;
+      public
+        constructor Create(var Conexao: TADOConnection; ComandoSQL: TComandoSQLEntidade);
+        function ExecutaSalvarAlterarExcluir(): integer;
+        function Buscar(var Query: TADOQuery): TADOQuery;
+    end;
+implementation
+
+uses
+  ExecutaComandosSQLDominio;
+
+{ TAtividadeDAO }
+
+function TAtividadeDAO.Buscar(var Query: TADOQuery): TADOQuery;
+var
+  FComandoSQLDominio: TExecutaComandosSQLDominio;
+  SQL: AnsiString;
+begin
+  try
+    SQL:= 'select * from Cadastro_Atividade';
+    Query.Close;
+    Query.SQL.Clear;
+    Query.SQL.Add(SQL);
+    Query.Open;
+    FComandoSQLDominio:= TExecutaComandosSQLDominio.Create(ComandoSQL);
+    Result:= FComandoSQLDominio.ExecutaComandoSQLRetornaADOQuery(Query);
+  finally
+
+  end;
+end;
+
+constructor TAtividadeDAO.Create(var Conexao: TADOConnection; ComandoSQL: TComandoSQLEntidade);
+begin
+  Self.Conexao:= Conexao;
+  Self.ComandoSQL:= ComandoSQL;
+end;
+
+function TAtividadeDAO.ExecutaSalvarAlterarExcluir(): integer;
+var
+  FComandoSQLDominio: TExecutaComandosSQLDominio;
+begin
+  try
+    FComandoSQLDominio:= TExecutaComandosSQLDominio.Create(ComandoSQL);
+    Result:= FComandoSQLDominio.ExecutaComandoSQLSalvarAlterarExcluir;
+  finally
+
+  end;
+end;
+
+end.

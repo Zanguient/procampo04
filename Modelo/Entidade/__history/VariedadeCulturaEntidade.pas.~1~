@@ -1,0 +1,14 @@
+unit CulturaEntidade;
+
+interface
+  type
+    TCulturaEntidade = class
+    private
+      FCodigo: integer;
+      FDescricao: AnsiString;
+      FDataCadastro: TDate;
+    public
+    end;
+implementation
+
+end.

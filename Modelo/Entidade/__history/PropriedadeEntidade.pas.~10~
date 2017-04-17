@@ -1,0 +1,37 @@
+unit PropriedadeEntidade;
+
+interface
+
+uses
+  CidadeEntidade;
+  type
+    TPropriedadeEntidade = class
+    private
+      FCodigo: integer;
+      FNomeFazenda: AnsiString;
+      FProprietario: AnsiString;
+      FEndereco: AnsiString;
+      FCidade: TCidadeEntidade;
+      FTelefone: AnsiString;
+      FCelular: AnsiString;
+      FArea: AnsiString;
+      FSite: Ansistring;
+      FEmail: AnsiString;
+      FDataCadastro: TDate;
+    public
+      FCodigo: integer;
+      FNomeFazenda: AnsiString;
+      FProprietario: AnsiString;
+      FEndereco: AnsiString;
+      FCidade: TCidadeEntidade;
+      FTelefone: AnsiString;
+      FCelular: AnsiString;
+      FArea: AnsiString;
+      FSite: Ansistring;
+      FEmail: AnsiString;
+      FDataCadastro: TDate;
+
+    end;
+implementation
+
+end.

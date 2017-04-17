@@ -1,0 +1,12 @@
+unit ComandoSQLEntidade;
+
+interface
+  type
+    TComandoSQLEntidade = class
+      private
+
+      public
+    end;
+implementation
+
+end.

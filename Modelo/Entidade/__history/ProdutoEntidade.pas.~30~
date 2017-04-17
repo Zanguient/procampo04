@@ -1,0 +1,55 @@
+unit ProdutoEntidade;
+
+interface
+
+uses
+  GrupoProdutoEntidade, MarcaEntidade, PropriedadeEntidade;
+  type
+    TProdutoEntidade = class
+      private
+        FCodigo: integer;
+        FCodigoPropriedade: TPropriedadeEntidade;
+        FCodigoProduto: AnsiString;
+        FDescricao: AnsiString;
+        FPrecoCompra: double;
+        FQuantidade: double;
+        FUnidade: AnsiString;
+        FVolume: Double;
+        FVolumeTotal: double;
+        FDataCadastro: TDate;
+        FDataUltimaCompra: TDate;
+        FDataValidade: TDate;
+        FObservacao: AnsiString;
+        FAplicacao: AnsiString;
+        FControlaEstoque: Boolean;
+        FAtivo: Boolean;
+        FCarencia: integer;
+        FGrupoProduto: TGrupoProdutoEntidade;
+        FMarca: TMarcaEntidade;
+      public
+        property Codigo: integer;
+        property CodigoPropriedade: TPropriedadeEntidade;
+        property CodigoProduto: AnsiString;
+        property Descricao: AnsiString;
+        property PrecoCompra: double;
+        property Quantidade: double;
+        property Unidade: AnsiString;
+        property Volume: Double;
+        property VolumeTotal: double;
+        property DataCadastro: TDate;
+        property DataUltimaCompra: TDate;
+        property DataValidade: TDate;
+        property Observacao: AnsiString;
+        property Aplicacao: AnsiString;
+        property ControlaEstoque: Boolean;
+        property Ativo: Boolean;
+        property Carencia: integer;
+        property GrupoProduto: TGrupoProdutoEntidade;
+        property Marca: TMarcaEntidade;
+    end;
+implementation
+
+{ TProdutoEntidade }
+
+
+end.

@@ -1,0 +1,61 @@
+unit RegistroAtividadePlantioEntidade;
+
+interface
+
+uses
+  SafraEntidade, VariedadeCulturaEntidade;
+  type
+    TRegistroAtividadePlantioEntidade = class
+    private
+      FCodigo: integer;
+      FCodigoRegistroAtividade: integer;
+      FSafra: TSafraEntidade;
+      FVariedade: TVariedadeCulturaEntidade;
+      FDataPlantio: TDate;
+
+      procedure SetCodigo(const Value: integer);
+      procedure SetCodigoRegistroAtividade(const Value: integer);
+      procedure SetDataPlantio(const Value: TDate);
+      procedure SetSafra(const Value: TSafraEntidade);
+      procedure SetVariedade(const Value: TVariedadeCulturaEntidade);
+    public
+      property Codigo: integer read FCodigo write SetCodigo;
+      property CodigoRegistroAtividade: integer read FCodigoRegistroAtividade write SetCodigoRegistroAtividade;
+      property Safra: TSafraEntidade read FSafra write SetSafra;
+      property Variedade: TVariedadeCulturaEntidade read FVariedade write SetVariedade;
+      property DataPlantio: TDate read FDataPlantio write SetDataPlantio;
+
+    end;
+implementation
+
+{ TRegistroAtividadePlantioEntidade }
+
+procedure TRegistroAtividadePlantioEntidade.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TRegistroAtividadePlantioEntidade.SetCodigoRegistroAtividade(
+  const Value: integer);
+begin
+  FCodigoRegistroAtividade := Value;
+end;
+
+procedure TRegistroAtividadePlantioEntidade.SetDataPlantio(const Value: TDate);
+begin
+  FDataPlantio := Value;
+end;
+
+procedure TRegistroAtividadePlantioEntidade.SetSafra(
+  const Value: TSafraEntidade);
+begin
+  FSafra := Value;
+end;
+
+procedure TRegistroAtividadePlantioEntidade.SetVariedade(
+  const Value: TVariedadeCulturaEntidade);
+begin
+  FVariedade := Value;
+end;
+
+end.

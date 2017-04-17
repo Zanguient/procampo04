@@ -1,0 +1,19 @@
+unit GrupoProdutoEntidade;
+
+interface
+  type
+    TGrupoProdutoEntidade = class
+    private
+      FCodigo: integer;
+      FDescricao: AnsiString;
+      FDataCadastro: TDate;
+
+      FCodigo: integer;
+      FDescricao: AnsiString;
+      FDataCadastro: TDate;
+    public
+
+    end;
+implementation
+
+end.

@@ -1,0 +1,12 @@
+unit SafraEntidade;
+
+interface
+  type
+    TSafraEntidade = class
+      FCodigo: integer;
+      FDescricao: AnsiString;
+      FDataCadastro: TDate;
+    end;
+implementation
+
+end.

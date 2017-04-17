@@ -1,0 +1,17 @@
+unit PropriedadeEntidade;
+
+interface
+
+uses
+  CidadeEntidade;
+  type
+    TPropriedadeEntidade = class
+      FCodigo: integer;
+      FNomeFazenda: AnsiString;
+      FProprietario: AnsiString;
+      FEndereco: AnsiString;
+      FCidade: TCidadeEntidade;
+    end;
+implementation
+
+end.

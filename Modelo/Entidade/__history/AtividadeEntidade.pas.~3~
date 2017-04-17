@@ -1,0 +1,12 @@
+unit AtividadeEntidade;
+
+interface
+  type
+    TAtividadeEntidade = class
+      private
+
+      public
+    end;
+implementation
+
+end.

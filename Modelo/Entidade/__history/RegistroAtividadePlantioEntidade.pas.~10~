@@ -1,0 +1,22 @@
+unit RegistroAtividadePlantioEntidade;
+
+interface
+  type
+    TRegistroAtividadePlantioEntidade = class
+    private
+      FCodigo: integer;
+      FCodigoRegistroAtividade: integer;
+      FSafra: TSafraEntidade;
+      FVariedade: TVariedadeCulturaEntidade;
+      FDataPlantio: TDate;
+    public
+      property Codigo: integer;
+      property CodigoRegistroAtividade: integer;
+      property Safra: TSafraEntidade;
+      property Variedade: TVariedadeCulturaEntidade;
+      property DataPlantio: TDate;
+
+    end;
+implementation
+
+end.

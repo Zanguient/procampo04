@@ -1,0 +1,14 @@
+unit RegistroAtividadeAtividadesEntidade;
+
+interface
+  type
+    TRegistroAtividadeAtividadesEntidade = class
+      private
+        FCodigo: Integer;
+        FCodigoRegistroAtividade: integer;
+
+      public
+    end;
+implementation
+
+end.

@@ -1,0 +1,19 @@
+unit ComandoSQLEntidade;
+
+interface
+
+uses
+  ADODB, System.Generics.Collections;
+  type
+    TComandoSQLEntidade = class
+      private
+        FConexao: TADOConnection;
+        FComandoSQL: String;
+        FParametros: TList<WideString>;
+        FValores: TList<Variant>;
+      public
+        constructor Create;
+    end;
+implementation
+
+end.

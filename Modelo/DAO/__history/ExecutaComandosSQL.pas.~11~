@@ -1,0 +1,37 @@
+unit ExecutaComandosSQL;
+
+interface
+
+uses
+  ComandoSQLEntidade, ADODB;
+  type
+    TExecutaComandosSQL = class
+      private
+        qAux: TADOQuery;
+        FComandoSQL: TComandoSQLEntidade;
+      public
+        function ExecutaComandoSQLSalvarAlterarExcluir: Integer;
+        function ExecutaComandoSQLRetornaADOQuery(var Query: TADOQuery): integer;
+        constructor Create(var FComando: TComandoSQLEntidade);
+    end;
+implementation
+
+{ TExecutaComandosSQL }
+
+constructor TExecutaComandosSQL.Create(var FComando: TComandoSQLEntidade);
+begin
+
+end;
+
+function TExecutaComandosSQL.ExecutaComandoSQLRetornaADOQuery(
+  var Query: TADOQuery): integer;
+begin
+
+end;
+
+function TExecutaComandosSQL.ExecutaComandoSQLSalvarAlterarExcluir: Integer;
+begin
+
+end;
+
+end.

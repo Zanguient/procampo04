@@ -1,0 +1,10 @@
+unit SafraEntidade;
+
+interface
+  type
+    TSafraEntidade = class
+
+    end;
+implementation
+
+end.

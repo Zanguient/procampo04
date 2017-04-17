@@ -1,0 +1,78 @@
+unit RegistroAtividadeEntidade;
+
+interface
+
+uses
+  System.Generics.Collections, TalhaoEntidade, SafraEntidade, PropriedadeEntidade,
+  RegistroAtividadeAtividadesEntidade, RegistroAtividadePlantioEntidade;
+  type
+    TRegistroAtividadeEntidade = class
+    private
+      FCodigo: integer;
+      FTalhao: TTalhaoEntidade;
+      FSafra: TSafraEntidade;
+      FPropriedade: TPropriedadeEntidade;
+      FDataCadastro: TDate;
+      FAtividades: TObjectList<TRegistroAtividadeAtividadesEntidade>;
+      FPlantio: TObjectList<TRegistroAtividadePlantioEntidade>;
+      procedure SetAtividades(const Value: TObjectList<TRegistroAtividadeAtividadesEntidade>);
+      procedure SetCodigo(const Value: integer);
+      procedure SetDataCadastro(const Value: TDate);
+      procedure SetPropriedade(const Value: TPropriedadeEntidade);
+      procedure SetSafra(const Value: TSafraEntidade);
+      procedure SetTalhao(const Value: TTalhaoEntidade);
+      procedure SetPlantio(const Value: TObjectList<TRegistroAtividadePlantioEntidade>);
+
+    public
+      property Codigo: integer read FCodigo write SetCodigo;
+      property Talhao: TTalhaoEntidade read FTalhao write SetTalhao;
+      property Safra: TSafraEntidade read FSafra write SetSafra;
+      property Propriedade: TPropriedadeEntidade read FPropriedade write SetPropriedade;
+      property DataCadastro: TDate read FDataCadastro write SetDataCadastro;
+      property Atividades: TObjectList<TRegistroAtividadeAtividadesEntidade> read FAtividades write SetAtividades;
+      property Plantio: TObjectList<TRegistroAtividadePlantioEntidade> read FPlantio write SetPlantio;
+
+    end;
+implementation
+
+{ TRegistroAtividadeEntidade }
+
+procedure TRegistroAtividadeEntidade.SetAtividades(
+  const Value: TObjectList<TRegistroAtividadeAtividadesEntidade>);
+begin
+  FAtividades := Value;
+end;
+
+procedure TRegistroAtividadeEntidade.SetCodigo(const Value: integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TRegistroAtividadeEntidade.SetDataCadastro(const Value: TDate);
+begin
+  FDataCadastro := Value;
+end;
+
+procedure TRegistroAtividadeEntidade.SetPlantio(
+  const Value: TObjectList<TRegistroAtividadePlantioEntidade>);
+begin
+  FPlantio := Value;
+end;
+
+procedure TRegistroAtividadeEntidade.SetPropriedade(
+  const Value: TPropriedadeEntidade);
+begin
+  FPropriedade := Value;
+end;
+
+procedure TRegistroAtividadeEntidade.SetSafra(const Value: TSafraEntidade);
+begin
+  FSafra := Value;
+end;
+
+procedure TRegistroAtividadeEntidade.SetTalhao(const Value: TTalhaoEntidade);
+begin
+  FTalhao := Value;
+end;
+
+end.

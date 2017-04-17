@@ -1,0 +1,10 @@
+unit RegistroAtividadeAtividadesEntidade;
+
+interface
+  type
+    TRegistroAtividadeAtividadesEntidade = class
+
+    end;
+implementation
+
+end.

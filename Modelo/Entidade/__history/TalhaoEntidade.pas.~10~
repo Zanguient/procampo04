@@ -1,0 +1,22 @@
+unit TalhaoEntidade;
+
+interface
+  type
+    TTalhaoEntidade = class
+      private
+        FCodigo: integer;
+        FNumeroTalhao: AnsiString;
+        FDescricaoTalhao: AnsiString;
+        FHectare: Double;
+        FDataCadastro: TDate;
+      public
+        propery Codigo: integer;
+        FNumeroTalhao: AnsiString;
+        FDescricaoTalhao: AnsiString;
+        FHectare: Double;
+        FDataCadastro: TDate;
+
+    end;
+implementation
+
+end.

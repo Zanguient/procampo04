@@ -1,0 +1,542 @@
+object FrmCadastro_Cidade: TFrmCadastro_Cidade
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Cadastro de Cidade'
+  ClientHeight = 251
+  ClientWidth = 597
+  Color = clWindow
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poScreenCenter
+  Scaled = False
+  Visible = True
+  OnActivate = FormActivate
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
+  TextHeight = 13
+  object PageControl1: TPageControl
+    Left = 125
+    Top = 0
+    Width = 472
+    Height = 251
+    Cursor = crHandPoint
+    ActivePage = TabSheet1
+    Align = alClient
+    Style = tsFlatButtons
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Cadastrar'
+      object LblCodigo: TLabel
+        Left = 0
+        Top = 13
+        Width = 38
+        Height = 13
+        Caption = 'C'#243'digo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object LblData_Cadastro: TLabel
+        Left = 55
+        Top = 13
+        Width = 81
+        Height = 13
+        Caption = 'Data Cadastro'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object LblMarca: TLabel
+        Left = 0
+        Top = 57
+        Width = 38
+        Height = 13
+        Caption = 'Cidade'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label1: TLabel
+        Left = 0
+        Top = 99
+        Width = 14
+        Height = 13
+        Caption = 'UF'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 55
+        Top = 99
+        Width = 24
+        Height = 13
+        Caption = 'DDD'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object EdtCodigo: TEdit
+        Left = 0
+        Top = 32
+        Width = 56
+        Height = 17
+        BevelInner = bvNone
+        BevelKind = bkFlat
+        BevelOuter = bvRaised
+        BorderStyle = bsNone
+        Color = clBtnFace
+        TabOrder = 0
+      end
+      object MEdtData_Cadastro: TMaskEdit
+        Left = 55
+        Top = 32
+        Width = 81
+        Height = 17
+        BevelInner = bvNone
+        BevelOuter = bvRaised
+        BevelKind = bkFlat
+        BorderStyle = bsNone
+        EditMask = '!00/00/0000;1;_'
+        MaxLength = 10
+        TabOrder = 1
+        Text = '  /  /    '
+        OnEnter = MEdtData_CadastroEnter
+        OnExit = MEdtData_CadastroExit
+      end
+      object EdtCidade: TEdit
+        Left = 0
+        Top = 72
+        Width = 249
+        Height = 17
+        BevelInner = bvNone
+        BevelKind = bkFlat
+        BevelOuter = bvRaised
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        TabOrder = 2
+      end
+      object CmbUF: TComboBox
+        Left = 0
+        Top = 114
+        Width = 49
+        Height = 21
+        BevelInner = bvNone
+        BevelKind = bkFlat
+        CharCase = ecUpperCase
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        Items.Strings = (
+          'AC'
+          'AL'
+          'AP'
+          'AM'
+          'BA'
+          'CE'
+          'DF'
+          'ES'
+          'GO'
+          'MA'
+          'MT'
+          'MS'
+          'MG'
+          'PA'
+          'PB'
+          'PR'
+          'PE'
+          'PI'
+          'RJ'
+          'RN'
+          'RS'
+          'RO'
+          'RR'
+          'SC'
+          'SP'
+          'SE'
+          'TO')
+      end
+      object EdtDDD: TEdit
+        Left = 55
+        Top = 114
+        Width = 50
+        Height = 17
+        BevelInner = bvNone
+        BevelKind = bkFlat
+        BevelOuter = bvRaised
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        TabOrder = 4
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Pesquisar'
+      ImageIndex = 1
+      object cxGrid1: TcxGrid
+        Left = 0
+        Top = 0
+        Width = 464
+        Height = 220
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        LookAndFeel.NativeStyle = False
+        object cxGrid1DBTableView1: TcxGridDBTableView
+          OnDblClick = cxGrid1DBTableView1DblClick
+          Navigator.Buttons.CustomButtons = <>
+          Navigator.Buttons.Images = DM.ImageList1
+          Navigator.Buttons.First.Visible = False
+          Navigator.Buttons.PriorPage.Visible = False
+          Navigator.Buttons.Prior.Visible = False
+          Navigator.Buttons.Next.Enabled = False
+          Navigator.Buttons.Next.Visible = False
+          Navigator.Buttons.NextPage.Visible = False
+          Navigator.Buttons.Last.Visible = False
+          Navigator.Buttons.Insert.Enabled = False
+          Navigator.Buttons.Insert.Visible = False
+          Navigator.Buttons.Append.Visible = False
+          Navigator.Buttons.Delete.Hint = 'Clique para remover o registro selecionado'
+          Navigator.Buttons.Delete.ImageIndex = 2
+          Navigator.Buttons.Delete.Visible = True
+          Navigator.Buttons.Edit.Visible = False
+          Navigator.Buttons.Post.Visible = False
+          Navigator.Buttons.Cancel.Visible = False
+          Navigator.Buttons.Refresh.Visible = False
+          Navigator.Buttons.SaveBookmark.Visible = False
+          Navigator.Buttons.GotoBookmark.Visible = False
+          Navigator.Buttons.Filter.Visible = False
+          Navigator.Visible = True
+          FilterBox.CustomizeButtonAlignment = fbaLeft
+          FilterBox.Position = fpTop
+          FilterBox.Visible = fvNever
+          DataController.DataSource = dsConsulta
+          DataController.Filter.Active = True
+          DataController.Summary.DefaultGroupSummaryItems = <
+            item
+              Format = '#0.0,0'
+              Kind = skSum
+              Position = spFooter
+            end>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Kind = skCount
+              Column = cxGrid1DBTableView1Codigo
+            end>
+          DataController.Summary.SummaryGroups = <>
+          DateTimeHandling.DateFormat = 'DD/MM/YYYY'
+          FilterRow.InfoText = 'Clique para definir um filtro'
+          FilterRow.Visible = True
+          NewItemRow.InfoText = 'Clique para adicionar uma nova linha'
+          NewItemRow.SeparatorColor = clMenu
+          OptionsBehavior.GoToNextCellOnEnter = True
+          OptionsCustomize.ColumnHiding = True
+          OptionsCustomize.ColumnsQuickCustomization = True
+          OptionsCustomize.DataRowSizing = True
+          OptionsSelection.MultiSelect = True
+          OptionsView.NoDataToDisplayInfoText = 'N'#227'o h'#225' dados para visualizar'
+          OptionsView.Footer = True
+          OptionsView.GroupByBox = False
+          OptionsView.GroupFooterMultiSummaries = True
+          OptionsView.GroupFooters = gfAlwaysVisible
+          OptionsView.GroupSummaryLayout = gslAlignWithColumns
+          OptionsView.Indicator = True
+          Preview.Visible = True
+          object cxGrid1DBTableView1Codigo: TcxGridDBColumn
+            Caption = 'C'#243'digo'
+            DataBinding.FieldName = 'Codigo'
+            Options.Editing = False
+            Width = 57
+          end
+          object cxGrid1DBTableView1Cidade: TcxGridDBColumn
+            DataBinding.FieldName = 'Cidade'
+            RepositoryItem = cxEditRepository1TextItem1
+            MinWidth = 50
+            Width = 193
+          end
+          object cxGrid1DBTableView1UF: TcxGridDBColumn
+            DataBinding.FieldName = 'UF'
+            RepositoryItem = cxEditRepository1TextItem1
+            MinWidth = 2
+            Width = 39
+          end
+          object cxGrid1DBTableView1DDD: TcxGridDBColumn
+            DataBinding.FieldName = 'DDD'
+            MinWidth = 2
+            Width = 45
+          end
+          object cxGrid1DBTableView1Data_Cadastro: TcxGridDBColumn
+            Caption = 'Data Cadastro'
+            DataBinding.FieldName = 'Data_Cadastro'
+            Options.Editing = False
+            Width = 93
+          end
+        end
+        object cxGrid1Level1: TcxGridLevel
+          GridView = cxGrid1DBTableView1
+        end
+      end
+    end
+  end
+  object TlbFerramentas: TToolBar
+    Left = 0
+    Top = 0
+    Width = 125
+    Height = 251
+    Align = alLeft
+    AutoSize = True
+    ButtonHeight = 38
+    ButtonWidth = 121
+    DockSite = True
+    DragCursor = crHandPoint
+    DragKind = dkDock
+    DrawingStyle = dsGradient
+    EdgeBorders = [ebLeft, ebTop, ebRight, ebBottom]
+    EdgeInner = esLowered
+    EdgeOuter = esRaised
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    GradientEndColor = clWindow
+    HideClippedButtons = True
+    HotTrackColor = clMenu
+    Images = DM.ImgComandos
+    List = True
+    ParentFont = False
+    ParentShowHint = False
+    ShowCaptions = True
+    ShowHint = False
+    TabOrder = 1
+    object BBtnNovo: TToolButton
+      Left = 0
+      Top = 0
+      Cursor = crHandPoint
+      Caption = '&Novo'
+      ImageIndex = 10
+      Wrap = True
+      OnClick = BBtnNovoClick
+    end
+    object BBtnSalvar: TToolButton
+      Left = 0
+      Top = 38
+      Cursor = crHandPoint
+      Hint = 'Clique para Salvar/Alterar o registro'
+      Caption = '&Salvar'
+      Enabled = False
+      ImageIndex = 0
+      ParentShowHint = False
+      Wrap = True
+      ShowHint = True
+      OnClick = BBtnSalvarClick
+    end
+    object BBtnExcluir: TToolButton
+      Left = 0
+      Top = 76
+      Cursor = crHandPoint
+      Caption = '&Excluir'
+      Enabled = False
+      ImageIndex = 1
+      Wrap = True
+      OnClick = BBtnExcluirClick
+    end
+    object BBtnCancelar: TToolButton
+      Left = 0
+      Top = 114
+      Cursor = crHandPoint
+      Hint = 'Clique para Cancelar a Inser'#231#227'o ou Altera'#231#227'o de um registro'
+      Caption = '&Cancelar'
+      Enabled = False
+      ImageIndex = 3
+      ParentShowHint = False
+      Wrap = True
+      ShowHint = True
+      OnClick = BBtnCancelarClick
+    end
+    object BBtnFechar: TToolButton
+      Left = 0
+      Top = 152
+      Cursor = crHandPoint
+      Hint = 'Clique para Fechar a Janela Ativa'
+      Caption = '&Fechar Janela'
+      ImageIndex = 4
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = BBtnFecharClick
+    end
+  end
+  object qryConsulta: TADOQuery
+    Connection = DM.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Cidade')
+    Left = 312
+    Top = 112
+    object qryConsultaCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryConsultaCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 50
+    end
+    object qryConsultaUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object qryConsultaDDD: TStringField
+      FieldName = 'DDD'
+      Size = 2
+    end
+    object qryConsultaData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsConsulta: TDataSource
+    DataSet = qryConsulta
+    Left = 344
+    Top = 112
+  end
+  object cxPropertiesStore1: TcxPropertiesStore
+    Components = <
+      item
+        Component = cxGrid1DBTableView1Cidade
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGrid1DBTableView1Codigo
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGrid1DBTableView1Data_Cadastro
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGrid1DBTableView1DDD
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGrid1DBTableView1UF
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end>
+    StorageName = 'ConfiguraGrid'
+    Left = 184
+    Top = 112
+  end
+  object dxComponentPrinter1: TdxComponentPrinter
+    CurrentLink = dxComponentPrinter1Link1
+    PreviewOptions.Caption = 'Visualiza'#231#227'o de relat'#243'rio'
+    PreviewOptions.WindowState = wsMaximized
+    PrintTitle = 'Impress'#227'o de relat'#243'rio'
+    Version = 0
+    Left = 216
+    Top = 112
+    object dxComponentPrinter1Link1: TdxGridReportLink
+      Component = cxGrid1
+      PrinterPage.DMPaper = 9
+      PrinterPage.Footer = 6350
+      PrinterPage.GrayShading = True
+      PrinterPage.Header = 6350
+      PrinterPage.Margins.Bottom = 12700
+      PrinterPage.Margins.Left = 12700
+      PrinterPage.Margins.Right = 12700
+      PrinterPage.Margins.Top = 12700
+      PrinterPage.Orientation = poLandscape
+      PrinterPage.PageFooter.CenterTitle.Strings = (
+        '[Date Printed]')
+      PrinterPage.PageFooter.LeftTitle.Strings = (
+        'P'#225'gina [Page #] de [Total Pages]')
+      PrinterPage.PageFooter.RightTitle.Strings = (
+        '[Time Printed]')
+      PrinterPage.PageHeader.CenterTitle.Strings = (
+        'FAV Sistemas')
+      PrinterPage.PageHeader.LeftTitle.Strings = (
+        'SAC - Sistema de Acompanhamento Comercial')
+      PrinterPage.PageHeader.RightTitle.Strings = (
+        '(64)3631-1926 / (64)9958-7272')
+      PrinterPage.PageSize.X = 210000
+      PrinterPage.PageSize.Y = 297000
+      PrinterPage._dxMeasurementUnits_ = 0
+      PrinterPage._dxLastMU_ = 2
+      ReportDocument.Caption = 'Novo documento'
+      ReportDocument.CreationDate = 42210.495096122690000000
+      ReportDocument.Description = 'Teste de novo documento'
+      ReportFootnotes.Font.Charset = ANSI_CHARSET
+      ReportFootnotes.Font.Color = clBlack
+      ReportFootnotes.Font.Height = -16
+      ReportFootnotes.Font.Name = 'Tahoma'
+      ReportFootnotes.Font.Style = [fsBold]
+      ReportFootnotes.Mode = fnmOnLastPage
+      ReportFootnotes.Text = 'Fim do Relat'#243'rio'
+      ReportTitle.Font.Charset = ANSI_CHARSET
+      ReportTitle.Font.Color = clBlack
+      ReportTitle.Font.Height = -19
+      ReportTitle.Font.Name = 'Tahoma'
+      ReportTitle.Font.Style = [fsBold]
+      ReportTitle.Text = 'Vendas'
+      OptionsOnEveryPage.Footers = False
+      OptionsOnEveryPage.FilterBar = False
+      OptionsView.ExpandButtons = False
+      OptionsView.FilterBar = False
+      OptionsView.GroupFooters = False
+      BuiltInReportLink = True
+    end
+  end
+  object cxEditRepository1: TcxEditRepository
+    Left = 440
+    Top = 80
+    object cxEditRepository1TextItem1: TcxEditRepositoryTextItem
+      Properties.CharCase = ecUpperCase
+    end
+  end
+end

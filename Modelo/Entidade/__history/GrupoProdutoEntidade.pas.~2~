@@ -1,0 +1,10 @@
+unit GrupoProdutoEntidade;
+
+interface
+  type
+    TGrupoProdutoEntidade = class
+
+    end;
+implementation
+
+end.

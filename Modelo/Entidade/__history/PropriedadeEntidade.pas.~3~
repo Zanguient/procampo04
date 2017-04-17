@@ -1,0 +1,11 @@
+unit PropriedadeEntidade;
+
+interface
+  type
+    TPropriedadeEntidade = class
+      FCodigo: integer;
+
+    end;
+implementation
+
+end.

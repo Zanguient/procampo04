@@ -1,0 +1,19 @@
+unit ExecutaComandosSQL;
+
+interface
+
+uses
+  ComandoSQLEntidade, ADODB;
+  type
+    TExecutaComandosSQL = class
+      private
+        qAux: TADOQuery;
+        FComandoSQL: TComandoSQLEntidade;
+      public
+        function ExecutaComandoSQLSalvarAlterarExcluir: Integer;
+        function ExecutaComandoSQLRetornaADOQuery(var Query: TADOQuery): integer;
+        constructor Create(var FComando: TComandoSQLEntidade);
+    end;
+implementation
+
+end.

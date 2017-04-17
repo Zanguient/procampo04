@@ -1,0 +1,10 @@
+unit CulturaEntidade;
+
+interface
+  type
+    TCulturaEntidade = class
+
+    end;
+implementation
+
+end.

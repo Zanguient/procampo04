@@ -1,0 +1,19 @@
+unit AtividadeEntidade;
+
+interface
+  type
+    TAtividadeEntidade = class
+      private
+        FCodigo: integer;
+        FDescricao: AnsiString;
+        FDataCadastro: TDate;
+      public
+        FCodigo: integer;
+        FDescricao: AnsiString;
+        FDataCadastro: TDate;
+
+
+    end;
+implementation
+
+end.

@@ -1,0 +1,12 @@
+unit CulturaEntidade;
+
+interface
+  type
+    TCulturaEntidade = class
+      FCodigo: integer;
+      FDescricao: AnsiString;
+      FVariedade: AnsiString;
+    end;
+implementation
+
+end.

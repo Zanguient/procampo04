@@ -1,0 +1,18 @@
+unit MarcaEntidade;
+
+interface
+  type
+    TMarcaEntidade = class
+      private
+        FCodigo: integer;
+        FDescricao: AnsiString;
+        FDataCadastro: TDate;
+      public
+        FCodigo: integer;
+        FDescricao: AnsiString;
+        FDataCadastro: TDate;
+
+    end;
+implementation
+
+end.

@@ -1,0 +1,14 @@
+unit PropriedadeEntidade;
+
+interface
+  type
+    TPropriedadeEntidade = class
+      FCodigo: integer;
+      FNomeFazenda: AnsiString;
+      FProprietario: AnsiString;
+      FEndereco: AnsiString;
+
+    end;
+implementation
+
+end.
