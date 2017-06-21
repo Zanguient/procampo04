@@ -1,0 +1,184 @@
+unit UDM;
+
+interface
+
+uses
+  SysUtils, Classes, ImgList, Controls, DB, ADODB;
+
+type
+  TDM = class(TDataModule)
+    ImgComandos: TImageList;
+    ADOConnection1: TADOConnection;
+    ImgChama: TImageList;
+    ImageList1: TImageList;
+    ImgImagens_Consulta: TImageList;
+    qryMotorista: TADOQuery;
+    qryMotoristaCodigo: TIntegerField;
+    qryMotoristaData_Cadastro: TDateTimeField;
+    qryMotoristaNome: TStringField;
+    qryMotoristaEndereco: TStringField;
+    qryMotoristaCidade: TStringField;
+    qryMotoristaSetor: TStringField;
+    dsMotorista: TDataSource;
+    qryTransportadora: TADOQuery;
+    qryTransportadoraCodigo: TIntegerField;
+    qryTransportadoraData_Cadastro: TDateTimeField;
+    qryTransportadoraNome: TStringField;
+    qryTransportadoraEndereco: TStringField;
+    qryTransportadoraCidade: TStringField;
+    qryTransportadoraSetor: TStringField;
+    dsTransportadora: TDataSource;
+    qryArmazem: TADOQuery;
+    qryArmazemCodigo: TIntegerField;
+    qryArmazemData_Cadastro: TDateTimeField;
+    qryArmazemNome: TStringField;
+    qryArmazemEndereco: TStringField;
+    qryArmazemCidade: TStringField;
+    qryArmazemSetor: TStringField;
+    dsArmazem: TDataSource;
+    dsProduto: TDataSource;
+    qryProduto: TADOQuery;
+    qryProdutoCodigo: TIntegerField;
+    qryProdutoCodigo_Propriedade: TIntegerField;
+    qryProdutoCodigo_Produto: TStringField;
+    qryProdutoDescricao: TStringField;
+    qryProdutoPreco_Compra: TFloatField;
+    qryProdutoEstoque: TFloatField;
+    qryProdutoUnidade_Compra: TStringField;
+    qryProdutoUnidade_Estoque: TStringField;
+    qryProdutoVolume: TFloatField;
+    qryProdutoData_Cadastro: TDateTimeField;
+    qryProdutoData_Ultima_Compra: TDateTimeField;
+    qryProdutoData_Validade: TDateTimeField;
+    qryProdutoObservacao: TStringField;
+    qryProdutoAplicacao: TStringField;
+    qryProdutoControla_Estoque: TBooleanField;
+    qryProdutoAtivo: TBooleanField;
+    qryProdutoCarencia: TIntegerField;
+    qryProdutoCodigo_Grupo: TIntegerField;
+    qryProdutoCodigo_Marca: TIntegerField;
+    dsVeiculo: TDataSource;
+    qryVeiculo: TADOQuery;
+    qryVeiculoCodigo: TIntegerField;
+    qryVeiculoPlaca: TStringField;
+    qryVeiculoModelo: TStringField;
+    qryVeiculoData_Cadastro: TDateTimeField;
+    dsDepositante: TDataSource;
+    qryDepositante: TADOQuery;
+    qryDepositanteCodigo: TIntegerField;
+    qryDepositanteData_Cadastro: TDateTimeField;
+    qryDepositanteNome: TStringField;
+    qryDepositanteEndereco: TStringField;
+    qryDepositanteCidade: TStringField;
+    qryDepositanteSetor: TStringField;
+    dsProdutor: TDataSource;
+    qryProdutor: TADOQuery;
+    qryProdutorCodigo: TIntegerField;
+    qryProdutorData_Cadastro: TDateTimeField;
+    qryProdutorNome: TStringField;
+    qryProdutorEndereco: TStringField;
+    qryProdutorCidade: TStringField;
+    qryProdutorSetor: TStringField;
+    qryAtividade: TADOQuery;
+    qryAtividadeCodigo: TIntegerField;
+    qryAtividadeDescricao: TStringField;
+    qryAtividadeData_Cadastro: TDateTimeField;
+    dsAtividade: TDataSource;
+    DataSource1: TDataSource;
+    ADOQuery1: TADOQuery;
+    IntegerField1: TIntegerField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    FloatField1: TFloatField;
+    qryVariedadeCultura: TADOQuery;
+    qryVariedadeCulturaCodigo: TIntegerField;
+    qryVariedadeCulturaDescricao: TStringField;
+    qryVariedadeCulturaData_Cadastro: TDateTimeField;
+    dsVariedadeCultura: TDataSource;
+    DataSource2: TDataSource;
+    ADOQuery2: TADOQuery;
+    IntegerField2: TIntegerField;
+    StringField3: TStringField;
+    DateTimeField1: TDateTimeField;
+    qryTalhao: TADOQuery;
+    qryTalhaoCodigo: TIntegerField;
+    qryTalhaoCodigo_Propriedade: TIntegerField;
+    qryTalhaoNumero_Talhao: TStringField;
+    qryTalhaoDescricao_Talhao: TStringField;
+    qryTalhaoArea: TFloatField;
+    qryTalhaoData_Cadastro: TDateTimeField;
+    dsTalhao: TDataSource;
+    qryCliente: TADOQuery;
+    dsCliente: TDataSource;
+    qryClienteCodigo: TIntegerField;
+    qryClienteData_Cadastro: TDateTimeField;
+    qryClienteNome: TStringField;
+    qryClienteEndereco: TStringField;
+    qryClienteCidade: TStringField;
+    qryClienteSetor: TStringField;
+    qryPropriedade: TADOQuery;
+    dsPropriedade: TDataSource;
+    qryPropriedadeCodigo: TIntegerField;
+    qryPropriedadeFazenda: TStringField;
+    qryPropriedadeProprietario: TStringField;
+    qryPropriedadeCodigo_Logradouro: TIntegerField;
+    qryPropriedadeCodigo_Cidade: TIntegerField;
+    qryPropriedadeTelefone: TStringField;
+    qryPropriedadeCelular: TStringField;
+    qryPropriedadeArea: TStringField;
+    qryPropriedadeSite: TStringField;
+    qryPropriedadeEmail: TStringField;
+    qryPropriedadeData_Cadastro: TDateTimeField;
+    qryVeiculoDescricao_Detalhada: TStringField;
+    qryVeiculoData_Entrada: TDateTimeField;
+    qryVeiculoKm_Entrada: TFloatField;
+    qryVeiculoData_Saida: TDateTimeField;
+    qryVeiculoKm_Saida: TFloatField;
+    qryVeiculoPreco: TFloatField;
+    qryVeiculoObservacao: TStringField;
+    qryVeiculoStatus: TStringField;
+    qryVeiculoCategoria: TStringField;
+    qryVeiculoTipo: TStringField;
+    qrySafra: TADOQuery;
+    dsSafra: TDataSource;
+    qrySafraCodigo: TIntegerField;
+    qrySafraDescricao: TStringField;
+    qrySafraData_Cadastro: TDateTimeField;
+    qryservico: TADOQuery;
+    dsservico: TDataSource;
+    qryfornecedor: TADOQuery;
+    dsfornecedor: TDataSource;
+    qryservicoCodigo: TAutoIncField;
+    qryservicoDescricao: TStringField;
+    qryservicoData_Cadastro: TDateTimeField;
+    qryfornecedorCodigo: TIntegerField;
+    qryfornecedorData_Cadastro: TDateTimeField;
+    qryfornecedorNome: TStringField;
+    qryfornecedorEndereco: TStringField;
+    qryfornecedorCidade: TStringField;
+    qryfornecedorSetor: TStringField;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+uses
+  UAtualiza_BD;
+
+{$R *.dfm}
+
+procedure TDM.DataModuleCreate(Sender: TObject);
+var
+  Atualizacao: TAtualiza_BD;
+begin
+  Atualizacao.Atualizacao;
+end;
+
+end.

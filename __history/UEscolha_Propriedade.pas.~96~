@@ -1,0 +1,180 @@
+unit UEscolha_Propriedade;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, ToolWin, ImgList, Mask, StdCtrls, ADODB, DB, Grids, DBGrids, ExtCtrls,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxStyles,
+  dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinBlueprint, dxSkinCaramel,
+  dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinDevExpressDarkStyle,
+  dxSkinDevExpressStyle, dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast,
+  dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky, dxSkinLondonLiquidSky,
+  dxSkinMcSkin, dxSkinMoneyTwins, dxSkinOffice2007Black, dxSkinOffice2007Blue,
+  dxSkinOffice2007Green, dxSkinOffice2007Pink, dxSkinOffice2007Silver,
+  dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
+  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
+  dxSkinWhiteprint, dxSkinXmas2008Blue, dxSkinscxPCPainter, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
+  cxGridCustomView, cxGrid, Mensagens, Log, Constantes,
+  ComandoSQLEntidade, GeradorDeCodigo, dxPSGlbl,
+  dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider,
+  dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport,
+  cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
+  dxPScxPageControlProducer, dxPScxGridLnk, dxPScxGridLayoutViewLnk,
+  dxPScxEditorProducers, dxPScxExtEditorProducers, dxSkinsdxBarPainter,
+  dxPSCore, dxPScxCommon, cxPropertiesStore, cxEditRepositoryItems, MetodosBasicos,
+  AtividadeEntidade, AtividadeDominio, Vcl.Menus, cxButtons, LoginEntidade,
+  LoginDominio, PropriedadeEntidade, cxGridBandedTableView,
+  cxGridDBBandedTableView;
+
+type
+  TFrmEscolha_Propriedade = class(TForm)
+    qryPropriedade: TADOQuery;
+    dsPropriedade: TDataSource;
+    cxButton1: TcxButton;
+    cxButton2: TcxButton;
+    qryPropriedadeCodigo: TIntegerField;
+    qryPropriedadeData_Cadastro: TDateTimeField;
+    qryPropriedadeNome: TStringField;
+    qryPropriedadeEndereco: TStringField;
+    qryPropriedadeCidade: TStringField;
+    qryPropriedadeSetor: TStringField;
+    qryPropriedadeTipo_Pessoa: TStringField;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBBandedTableView1: TcxGridDBBandedTableView;
+    cxGrid1DBBandedTableView1Nome: TcxGridDBBandedColumn;
+    cxGrid1DBBandedTableView1Endereco: TcxGridDBBandedColumn;
+    cxGrid1DBBandedTableView1Cidade: TcxGridDBBandedColumn;
+    cxStyleRepository1: TcxStyleRepository;
+    cxStyle1: TcxStyle;
+    Shape1: TShape;
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormActivate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure MEdtData_CadastroExit(Sender: TObject);
+    procedure cxButton2Click(Sender: TObject);
+    procedure cxButton1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+  private
+    CodigoPropriedade: Integer;
+    Op: TOperacoes;
+    Mensagens: TMensagens;
+    Log: TLog;
+    GeraCodigo: TGeradorDeCodigo;
+    FPropriedade: TPropriedadeEntidade;
+    FUsuario: TLoginEntidade;
+    FLoginDominio: TLoginDominio;
+    FComandoSQL: TComandoSQLEntidade;
+  public
+    ativo, enderec, achei: boolean;
+
+    constructor Create(AOwnder: TComponent); overload;
+    constructor Create(AOwnder: TComponent; FUsuario: TLoginEntidade); overload;
+  protected
+  end;
+
+var
+  FrmEscolha_Propriedade: TFrmEscolha_Propriedade;
+implementation
+
+uses UDM, UPrincipal, ULogin;
+
+{$R *.dfm}
+
+{ TFrmPadrao }
+
+constructor TFrmEscolha_Propriedade.Create(AOwnder: TComponent);
+begin
+  inherited Create(AOwnder);
+end;
+
+constructor TFrmEscolha_Propriedade.Create(AOwnder: TComponent;
+  FUsuario: TLoginEntidade);
+begin
+  Self.FUsuario:= FUsuario;
+  //inherited Create(AOwnder);
+end;
+
+procedure TFrmEscolha_Propriedade.cxButton1Click(Sender: TObject);
+var
+  Retorno: AnsiString;
+begin
+  FPropriedade:= TPropriedadeEntidade.Create;
+  FPropriedade.Codigo:= qryPropriedadeCodigo.AsInteger;
+  FPropriedade.NomeFazenda:= qryPropriedadeNome.AsString;
+
+  Application.CreateForm(TFrmPrincipal, FrmPrincipal);
+  FrmPrincipal.Create(Self, FPropriedade, FUsuario);
+  ModalResult:= mrOk;
+  //Application.Run;
+end;
+
+procedure TFrmEscolha_Propriedade.cxButton2Click(Sender: TObject);
+begin
+  //FrmEscolha_Propriedade.Release;
+  //Application.Terminate;
+end;
+
+procedure TFrmEscolha_Propriedade.FormActivate(Sender: TObject);
+begin
+  ativo:= true;
+end;
+
+procedure TFrmEscolha_Propriedade.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:= caFree;
+  //FrmEscolha_Propriedade:= Nil;
+end;
+
+procedure TFrmEscolha_Propriedade.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  //FrmEscolha_Propriedade.Free;
+  //FrmEscolha_Propriedade:= Nil;
+end;
+
+procedure TFrmEscolha_Propriedade.FormDeactivate(Sender: TObject);
+begin
+  ativo:= false;
+end;
+
+procedure TFrmEscolha_Propriedade.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (key = vk_escape) then
+    close;
+end;
+
+procedure TFrmEscolha_Propriedade.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+  begin
+    key:=#0; //anula todas as teclas
+    SelectNext(ActiveControl, true, true);
+  end;
+end;
+
+procedure TFrmEscolha_Propriedade.FormShow(Sender: TObject);
+begin
+  //FrmLogin.Close;
+end;
+
+procedure TFrmEscolha_Propriedade.MEdtData_CadastroExit(Sender: TObject);
+begin
+end;
+
+{initialization
+  RegisterClass(TFrmCadastro_Atividade);
+
+finalization
+  UnRegisterClass(TFrmCadastro_Atividade);}
+
+end.

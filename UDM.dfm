@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 426
+  Height = 471
   Width = 611
   object ImgComandos: TImageList
     Height = 32
@@ -9,7 +9,7 @@ object DM: TDM
     Left = 128
     Top = 8
     Bitmap = {
-      494C01010B00B800D40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B00B8000C0120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1616,7 +1616,7 @@ object DM: TDM
     Left = 208
     Top = 8
     Bitmap = {
-      494C010102000800700020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800A80020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       000000000000000000000000000000000000000000000000000000000000B484
       84006C666E006C666E0000000000000000000000000000000000000000000000
@@ -2157,7 +2157,7 @@ object DM: TDM
     Left = 32
     Top = 88
     Bitmap = {
-      494C01010300A000B4000C000C00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010300A000EC000C000C00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000300000000C00000001002000000000000009
       000000000000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -2245,7 +2245,7 @@ object DM: TDM
     Left = 321
     Top = 7
     Bitmap = {
-      494C010109000C00E40620002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000C001C0720002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3836,30 +3836,6 @@ object DM: TDM
       FFF81FFFFFFFFFFFFFFFFFFFF8007FFF00000000000000000000000000000000
       000000000000}
   end
-  object qrySafra: TADOQuery
-    Connection = ADOConnection1
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select * from Cadastro_Safra')
-    Left = 32
-    Top = 136
-    object qrySafraCodigo: TIntegerField
-      FieldName = 'Codigo'
-    end
-    object qrySafraDescricao: TStringField
-      FieldName = 'Descricao'
-      Size = 50
-    end
-    object qrySafraData_Cadastro: TDateTimeField
-      FieldName = 'Data_Cadastro'
-    end
-  end
-  object dsSafra: TDataSource
-    DataSet = qrySafra
-    Left = 64
-    Top = 136
-  end
   object qryMotorista: TADOQuery
     Connection = ADOConnection1
     CursorType = ctStatic
@@ -3873,9 +3849,6 @@ object DM: TDM
     end
     object qryMotoristaData_Cadastro: TDateTimeField
       FieldName = 'Data_Cadastro'
-    end
-    object qryMotoristaTipoPessoa: TStringField
-      FieldName = 'TipoPessoa'
     end
     object qryMotoristaNome: TStringField
       FieldName = 'Nome'
@@ -3913,9 +3886,6 @@ object DM: TDM
     object qryTransportadoraData_Cadastro: TDateTimeField
       FieldName = 'Data_Cadastro'
     end
-    object qryTransportadoraTipoPessoa: TStringField
-      FieldName = 'TipoPessoa'
-    end
     object qryTransportadoraNome: TStringField
       FieldName = 'Nome'
       Size = 100
@@ -3951,9 +3921,6 @@ object DM: TDM
     end
     object qryArmazemData_Cadastro: TDateTimeField
       FieldName = 'Data_Cadastro'
-    end
-    object qryArmazemTipoPessoa: TStringField
-      FieldName = 'TipoPessoa'
     end
     object qryArmazemNome: TStringField
       FieldName = 'Nome'
@@ -4006,9 +3973,6 @@ object DM: TDM
     end
     object qryProdutoPreco_Compra: TFloatField
       FieldName = 'Preco_Compra'
-    end
-    object qryProdutoEstoque: TFloatField
-      FieldName = 'Estoque'
     end
     object qryProdutoUnidade_Compra: TStringField
       FieldName = 'Unidade_Compra'
@@ -4080,6 +4044,38 @@ object DM: TDM
     object qryVeiculoData_Cadastro: TDateTimeField
       FieldName = 'Data_Cadastro'
     end
+    object qryVeiculoDescricao_Detalhada: TStringField
+      FieldName = 'Descricao_Detalhada'
+      Size = 200
+    end
+    object qryVeiculoData_Entrada: TDateTimeField
+      FieldName = 'Data_Entrada'
+    end
+    object qryVeiculoKm_Entrada: TFloatField
+      FieldName = 'Km_Entrada'
+    end
+    object qryVeiculoData_Saida: TDateTimeField
+      FieldName = 'Data_Saida'
+    end
+    object qryVeiculoKm_Saida: TFloatField
+      FieldName = 'Km_Saida'
+    end
+    object qryVeiculoPreco: TFloatField
+      FieldName = 'Preco'
+    end
+    object qryVeiculoObservacao: TStringField
+      FieldName = 'Observacao'
+      Size = 800
+    end
+    object qryVeiculoStatus: TStringField
+      FieldName = 'Status'
+    end
+    object qryVeiculoCategoria: TStringField
+      FieldName = 'Categoria'
+    end
+    object qryVeiculoTipo: TStringField
+      FieldName = 'Tipo'
+    end
   end
   object dsDepositante: TDataSource
     DataSet = qryDepositante
@@ -4099,9 +4095,6 @@ object DM: TDM
     end
     object qryDepositanteData_Cadastro: TDateTimeField
       FieldName = 'Data_Cadastro'
-    end
-    object qryDepositanteTipoPessoa: TStringField
-      FieldName = 'TipoPessoa'
     end
     object qryDepositanteNome: TStringField
       FieldName = 'Nome'
@@ -4138,9 +4131,6 @@ object DM: TDM
     end
     object qryProdutorData_Cadastro: TDateTimeField
       FieldName = 'Data_Cadastro'
-    end
-    object qryProdutorTipoPessoa: TStringField
-      FieldName = 'TipoPessoa'
     end
     object qryProdutorNome: TStringField
       FieldName = 'Nome'
@@ -4293,5 +4283,759 @@ object DM: TDM
     DataSet = qryTalhao
     Left = 224
     Top = 240
+  end
+  object qryCliente: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Pessoa')
+    Left = 312
+    Top = 184
+    object qryClienteCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryClienteData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+    object qryClienteNome: TStringField
+      FieldName = 'Nome'
+      Size = 100
+    end
+    object qryClienteEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 200
+    end
+    object qryClienteCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 100
+    end
+    object qryClienteSetor: TStringField
+      FieldName = 'Setor'
+      Size = 100
+    end
+  end
+  object dsCliente: TDataSource
+    DataSet = qryCliente
+    Left = 344
+    Top = 184
+  end
+  object qryPropriedade: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Pessoa')
+    Left = 312
+    Top = 136
+    object qryPropriedadeCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryPropriedadeCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryPropriedadeCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qryPropriedadeData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+    object qryPropriedadeNome: TStringField
+      FieldName = 'Nome'
+      Size = 100
+    end
+    object qryPropriedadeEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 200
+    end
+    object qryPropriedadeCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 100
+    end
+    object qryPropriedadeSetor: TStringField
+      FieldName = 'Setor'
+      Size = 100
+    end
+  end
+  object dsPropriedade: TDataSource
+    DataSet = qryPropriedade
+    Left = 344
+    Top = 136
+  end
+  object qrySafra: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Safra')
+    Left = 32
+    Top = 136
+    object qrySafraCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qrySafraDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 50
+    end
+    object qrySafraData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsSafra: TDataSource
+    DataSet = qrySafra
+    Left = 64
+    Top = 136
+  end
+  object qryservico: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Servico')
+    Left = 312
+    Top = 240
+    object qryservicoCodigo: TAutoIncField
+      FieldName = 'Codigo'
+      ReadOnly = True
+    end
+    object qryservicoDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 100
+    end
+    object qryservicoData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsservico: TDataSource
+    DataSet = qryservico
+    Left = 344
+    Top = 240
+  end
+  object qryfornecedor: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Pessoa')
+    Left = 312
+    Top = 288
+    object qryfornecedorCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryfornecedorData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+    object qryfornecedorNome: TStringField
+      FieldName = 'Nome'
+      Size = 100
+    end
+    object qryfornecedorEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 200
+    end
+    object qryfornecedorCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 100
+    end
+    object qryfornecedorSetor: TStringField
+      FieldName = 'Setor'
+      Size = 100
+    end
+  end
+  object dsfornecedor: TDataSource
+    DataSet = qryfornecedor
+    Left = 344
+    Top = 288
+  end
+  object qryocorrencia: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Ocorrencia')
+    Left = 312
+    Top = 336
+    object qryocorrenciaCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryocorrenciaDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 100
+    end
+    object qryocorrenciaData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsocorrencia: TDataSource
+    DataSet = qryocorrencia
+    Left = 344
+    Top = 336
+  end
+  object dsplanoFinanceiro: TDataSource
+    DataSet = qryplanoFinanceiro
+    Left = 424
+    Top = 136
+  end
+  object qryplanoFinanceiro: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Plano_Financeiro')
+    Left = 392
+    Top = 136
+    object qryplanoFinanceiroCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryplanoFinanceiroCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryplanoFinanceiroTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 7
+    end
+    object qryplanoFinanceiroDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 300
+    end
+    object qryplanoFinanceiroCodigo_SubNivel: TIntegerField
+      FieldName = 'Codigo_SubNivel'
+    end
+    object qryplanoFinanceiroData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+    object qryplanoFinanceiroSub_Nivel: TStringField
+      FieldName = 'Sub_Nivel'
+      Size = 50
+    end
+    object qryplanoFinanceiroCodigo_Pai: TIntegerField
+      FieldName = 'Codigo_Pai'
+    end
+  end
+  object qrytipoDocumento: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Tipo_Documento')
+    Left = 392
+    Top = 184
+    object qrytipoDocumentoCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qrytipoDocumentoDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 50
+    end
+    object qrytipoDocumentoData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dstipoDocumento: TDataSource
+    DataSet = qrytipoDocumento
+    Left = 424
+    Top = 184
+  end
+  object qrydepartamento: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Departamento')
+    Left = 392
+    Top = 240
+    object qrydepartamentoCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qrydepartamentoDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 50
+    end
+    object qrydepartamentoData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsdepartamento: TDataSource
+    DataSet = qrydepartamento
+    Left = 424
+    Top = 240
+  end
+  object qrycondicaoPagamento: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Condicao_Pagamento')
+    Left = 392
+    Top = 288
+    object qrycondicaoPagamentoCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qrycondicaoPagamentoStatus: TStringField
+      FieldName = 'Status'
+      Size = 7
+    end
+    object qrycondicaoPagamentoDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 50
+    end
+    object qrycondicaoPagamentoParcela: TIntegerField
+      FieldName = 'Parcela'
+    end
+    object qrycondicaoPagamentoPrazo: TIntegerField
+      FieldName = 'Prazo'
+    end
+    object qrycondicaoPagamentoTaxa: TFloatField
+      FieldName = 'Taxa'
+    end
+    object qrycondicaoPagamentoTipo_Pagamento: TStringField
+      FieldName = 'Tipo_Pagamento'
+    end
+    object qrycondicaoPagamentoTipo_Juro: TStringField
+      FieldName = 'Tipo_Juro'
+    end
+    object qrycondicaoPagamentoData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dscondicaoPagamento: TDataSource
+    DataSet = qrycondicaoPagamento
+    Left = 424
+    Top = 288
+  end
+  object qryOperacaoBancaria: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Operacao_Bancaria')
+    Left = 472
+    Top = 136
+    object qryOperacaoBancariaCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryOperacaoBancariaCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryOperacaoBancariaCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qryOperacaoBancariaOperacao: TStringField
+      FieldName = 'Operacao'
+      Size = 50
+    end
+    object qryOperacaoBancariaTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 7
+    end
+    object qryOperacaoBancariaData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsOperacaoBancaria: TDataSource
+    DataSet = qryOperacaoBancaria
+    Left = 504
+    Top = 136
+  end
+  object dsContaBancaria: TDataSource
+    DataSet = qryContaBancaria
+    Left = 504
+    Top = 184
+  end
+  object qryContaBancaria: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Conta_Bancaria')
+    Left = 472
+    Top = 184
+    object qryContaBancariaCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryContaBancariaCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryContaBancariaCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qryContaBancariaConta_Corrente: TStringField
+      FieldName = 'Conta_Corrente'
+    end
+    object qryContaBancariaAgencia: TStringField
+      FieldName = 'Agencia'
+    end
+    object qryContaBancariaNome_Correntista: TStringField
+      FieldName = 'Nome_Correntista'
+      Size = 50
+    end
+    object qryContaBancariaSaldo_Inicial: TFloatField
+      FieldName = 'Saldo_Inicial'
+    end
+    object qryContaBancariaLimite: TFloatField
+      FieldName = 'Limite'
+    end
+    object qryContaBancariaSaldo_Atual: TFloatField
+      FieldName = 'Saldo_Atual'
+    end
+    object qryContaBancariaData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object qryCheque: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Cheque')
+    Left = 472
+    Top = 240
+    object qryChequeCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryChequeCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryChequeCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qryChequeEmitente: TStringField
+      FieldName = 'Emitente'
+      Size = 50
+    end
+    object qryChequeRecebido_De: TStringField
+      FieldName = 'Recebido_De'
+      Size = 50
+    end
+    object qryChequeEnviado_A: TStringField
+      FieldName = 'Enviado_A'
+      Size = 50
+    end
+    object qryChequeAgencia: TStringField
+      FieldName = 'Agencia'
+    end
+    object qryChequeCodigo_Conta: TIntegerField
+      FieldName = 'Codigo_Conta'
+    end
+    object qryChequeTipo_Cheque: TStringField
+      FieldName = 'Tipo_Cheque'
+      Size = 30
+    end
+    object qryChequeSituacao_Cheque: TStringField
+      FieldName = 'Situacao_Cheque'
+      Size = 30
+    end
+    object qryChequeNumero_Cheque: TStringField
+      FieldName = 'Numero_Cheque'
+    end
+    object qryChequeValor: TFloatField
+      FieldName = 'Valor'
+    end
+    object qryChequeJuro: TFloatField
+      FieldName = 'Juro'
+    end
+    object qryChequeValor_Final: TFloatField
+      FieldName = 'Valor_Final'
+    end
+    object qryChequeData_Entrada: TDateTimeField
+      FieldName = 'Data_Entrada'
+    end
+    object qryChequeData_Vencimento: TDateTimeField
+      FieldName = 'Data_Vencimento'
+    end
+    object qryChequeData_Saida: TDateTimeField
+      FieldName = 'Data_Saida'
+    end
+    object qryChequeObservacoes: TStringField
+      FieldName = 'Observacoes'
+      Size = 800
+    end
+    object qryChequeStatus: TStringField
+      FieldName = 'Status'
+    end
+    object qryChequeData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsCheque: TDataSource
+    DataSet = qryCheque
+    Left = 504
+    Top = 240
+  end
+  object dsLancamentoBanco: TDataSource
+    DataSet = qryLancamentoBanco
+    Left = 504
+    Top = 288
+  end
+  object qryLancamentoBanco: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Lancamento_Banco')
+    Left = 472
+    Top = 288
+    object qryLancamentoBancoCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryLancamentoBancoCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryLancamentoBancoCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qryLancamentoBancoN_Documento: TIntegerField
+      FieldName = 'N_Documento'
+    end
+    object qryLancamentoBancoData_Lancamento: TDateTimeField
+      FieldName = 'Data_Lancamento'
+    end
+    object qryLancamentoBancoCodigo_Conta: TIntegerField
+      FieldName = 'Codigo_Conta'
+    end
+    object qryLancamentoBancoCodigo_Cheque: TIntegerField
+      FieldName = 'Codigo_Cheque'
+    end
+    object qryLancamentoBancoCodigo_Operacao: TIntegerField
+      FieldName = 'Codigo_Operacao'
+    end
+    object qryLancamentoBancoCodigo_Plano: TIntegerField
+      FieldName = 'Codigo_Plano'
+    end
+    object qryLancamentoBancoDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 50
+    end
+    object qryLancamentoBancoValor: TFloatField
+      FieldName = 'Valor'
+    end
+    object qryLancamentoBancoStatus: TStringField
+      FieldName = 'Status'
+      Size = 30
+    end
+    object qryLancamentoBancoSaldo_Anterior: TFloatField
+      FieldName = 'Saldo_Anterior'
+    end
+    object qryLancamentoBancoSaldo_Atual: TFloatField
+      FieldName = 'Saldo_Atual'
+    end
+    object qryLancamentoBancoCodigo_Conta_Transferencia: TIntegerField
+      FieldName = 'Codigo_Conta_Transferencia'
+    end
+    object qryLancamentoBancoSaldo_Anterior_Transferencia: TFloatField
+      FieldName = 'Saldo_Anterior_Transferencia'
+    end
+    object qryLancamentoBancoSaldo_Atual_Transferencia: TFloatField
+      FieldName = 'Saldo_Atual_Transferencia'
+    end
+  end
+  object qryContaBancariaDestino: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Conta_Bancaria')
+    Left = 472
+    Top = 336
+    object qryContaBancariaDestinoCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryContaBancariaDestinoCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryContaBancariaDestinoCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qryContaBancariaDestinoConta_Corrente: TStringField
+      FieldName = 'Conta_Corrente'
+    end
+    object qryContaBancariaDestinoAgencia: TStringField
+      FieldName = 'Agencia'
+    end
+    object qryContaBancariaDestinoNome_Correntista: TStringField
+      FieldName = 'Nome_Correntista'
+      Size = 50
+    end
+    object qryContaBancariaDestinoSaldo_Inicial: TFloatField
+      FieldName = 'Saldo_Inicial'
+    end
+    object qryContaBancariaDestinoLimite: TFloatField
+      FieldName = 'Limite'
+    end
+    object qryContaBancariaDestinoSaldo_Atual: TFloatField
+      FieldName = 'Saldo_Atual'
+    end
+    object qryContaBancariaDestinoData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsContaBancariaDestino: TDataSource
+    DataSet = qryContaBancariaDestino
+    Left = 504
+    Top = 336
+  end
+  object qrypluviometro: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Pluviometro')
+    Left = 472
+    Top = 384
+    object qrypluviometroCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qrypluviometroCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qrypluviometroCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qrypluviometroDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 50
+    end
+    object qrypluviometroData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dspluviometro: TDataSource
+    DataSet = qrypluviometro
+    Left = 504
+    Top = 384
+  end
+  object qryfuncionario: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Pessoa')
+    Left = 312
+    Top = 384
+    object qryfuncionarioCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryfuncionarioCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryfuncionarioCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qryfuncionarioData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+    object qryfuncionarioNome: TStringField
+      FieldName = 'Nome'
+      Size = 100
+    end
+    object qryfuncionarioEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 200
+    end
+    object qryfuncionarioCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 100
+    end
+    object qryfuncionarioSetor: TStringField
+      FieldName = 'Setor'
+      Size = 100
+    end
+  end
+  object dsfuncionario: TDataSource
+    DataSet = qryfuncionario
+    Left = 344
+    Top = 384
+  end
+  object qryitensFolha: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from Cadastro_Item_Folha_Pagamento')
+    Left = 392
+    Top = 384
+    object qryitensFolhaCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryitensFolhaCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qryitensFolhaCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qryitensFolhaDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 50
+    end
+    object qryitensFolhaTipo: TStringField
+      FieldName = 'Tipo'
+    end
+    object qryitensFolhaData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+  end
+  object dsitensFoha: TDataSource
+    DataSet = qryitensFolha
+    Left = 424
+    Top = 384
+  end
+  object qrypessoa: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select CP.*, CPT.Tipo_Pessoa from Cadastro_Pessoa CP'
+      
+        'left join Cadastro_Pessoa_Tipo CPT on (CP.Codigo = CPT.Codigo_Pe' +
+        'ssoa)')
+    Left = 248
+    Top = 384
+    object qrypessoaCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qrypessoaCodigo_Propriedade: TIntegerField
+      FieldName = 'Codigo_Propriedade'
+    end
+    object qrypessoaCodigo_Usuario: TIntegerField
+      FieldName = 'Codigo_Usuario'
+    end
+    object qrypessoaData_Cadastro: TDateTimeField
+      FieldName = 'Data_Cadastro'
+    end
+    object qrypessoaNome: TStringField
+      FieldName = 'Nome'
+      Size = 100
+    end
+    object qrypessoaEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 200
+    end
+    object qrypessoaCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 100
+    end
+    object qrypessoaSetor: TStringField
+      FieldName = 'Setor'
+      Size = 100
+    end
+    object qrypessoaTipo_Pessoa: TStringField
+      FieldName = 'Tipo_Pessoa'
+    end
+  end
+  object dspessoa: TDataSource
+    DataSet = qrypessoa
+    Left = 280
+    Top = 384
+  end
+  object cxStyleRepository1: TcxStyleRepository
+    PixelsPerInch = 96
+    object cxStyle1: TcxStyle
+      AssignedValues = [svFont]
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+    end
   end
 end

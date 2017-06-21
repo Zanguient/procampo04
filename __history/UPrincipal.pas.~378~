@@ -1,0 +1,571 @@
+unit UPrincipal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, ExtCtrls, Menus, ImgList, ActnList,
+  PlatformDefaultStyleActnCtrls, ActnMan, ActnCtrls, Ribbon, ToolWin, ActnMenus,
+  RibbonActnMenus, RibbonSilverStyleActnCtrls, cxLocalization, MetodosBasicos,
+  UCadastro_Cidade, UCadastro_Atividade, UCadastro_Grupo_Produto, UCadastro_Marca,
+  UCadastro_Variedade_Cultura, UCadastro_Safra, UCadastro_Talhao, UCadastro_Produto,
+  URegistro_Atividade, Vcl.Imaging.pngimage, URel_Atividades, UCadastro_Pessoa,
+   UCadastro_Veiculo, UContrato, UContrato_Venda,
+  PropriedadeEntidade, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinBlueprint,
+  dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
+  dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
+  dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, dxSkinsdxStatusBarPainter, dxStatusBar, UCadastro_Servico,
+  UManutencao_Maquina, UCadastro_Ocorrencia, UCadastro_Plano_Financeiro,
+  UCadastro_Condicao_Pagamento, UCadastro_Departamento, UCadastro_Tipo_Documento,
+  ULancamento_Financeiro, UCadastro_Conta_Bancaria, UCadastro_Cheque, UCadastro_Operacao_Bancaria,
+  ULancamento_Banco, LoginEntidade, ULista_Lancamento_Financeiro, UEntrada_Produto,
+  UConciliacao_Bancaria, UCadastro_Pluviometro, UCadastro_Item_Folha_Pagamento, UDados_Clima,
+  UFolha_Pagamento, dxSkinsdxNavBarPainter, dxNavBarCollns, cxClasses,
+  dxNavBarBase, dxNavBar, dxNavBarGroupItems, UDica_Financeiro, UDica_Estoque, UDica_Cadastro,
+  URel_Visao_Geral, URel_Estoque_Grao;
+
+type
+  TFrmPrincipal = class(TForm)
+    ActionManager1: TActionManager;
+    acAgenda_Telefonica: TAction;
+    acRecibo: TAction;
+    acMala_Direta: TAction;
+    acGera_Etiqueta_Cliente: TAction;
+    acGera_Etiqueta_Produto: TAction;
+    acAgenda_Compromisso: TAction;
+    acConfiguracao_Sistema: TAction;
+    acCadastro_Cidade: TAction;
+    acConsulta_Atividades: TAction;
+    ImageList1: TImageList;
+    PopupMenu1: TPopupMenu;
+    Produtos1: TMenuItem;
+    Timer1: TTimer;
+    Ribbon1: TRibbon;
+    RibbonApplicationMenuBar1: TRibbonApplicationMenuBar;
+    RibbonPage4: TRibbonPage;
+    RibbonGroup6: TRibbonGroup;
+    RibbonPage3: TRibbonPage;
+    RibbonGroup5: TRibbonGroup;
+    RibbonPage1: TRibbonPage;
+    RibbonGroup1: TRibbonGroup;
+    cxLocalizer1: TcxLocalizer;
+    acCadastro_Atividade: TAction;
+    acCadastro_Grupo_Produto: TAction;
+    acCadastro_Marca: TAction;
+    acCadastro_Variedade_Cultura: TAction;
+    acCadastro_Safra: TAction;
+    acCadastro_Talhao: TAction;
+    acCadastro_Produto: TAction;
+    acRegistro_Atividades: TAction;
+    Image1: TImage;
+    acCadastro_Pessoa: TAction;
+    Veículos: TAction;
+    acContrato: TAction;
+    acVenda: TAction;
+    StbStatus: TdxStatusBar;
+    acCadastro_Servico: TAction;
+    acManutencao_Maquina: TAction;
+    acCadastro_Ocorrencia: TAction;
+    acCadastro_Plano_Financeiro: TAction;
+    acCadastro_Tipo_Documento: TAction;
+    acCadastro_Departamento: TAction;
+    acCadastro_Condicao_Pagamento: TAction;
+    acLancamento_Financeiro: TAction;
+    acCadastro_Conta_Bancaria: TAction;
+    acCadastro_Operacao_Bancaria: TAction;
+    acCadastro_Cheque: TAction;
+    acLancamento_Banco: TAction;
+    RibbonGroup2: TRibbonGroup;
+    acBaixar_Contas: TAction;
+    RibbonGroup3: TRibbonGroup;
+    acConciliacao_Bancaria: TAction;
+    acEntrada_Produto: TAction;
+    Timer2: TTimer;
+    RibbonGroup4: TRibbonGroup;
+    acCadastro_Pluviometro: TAction;
+    acCadastro_Item_Folha_Pagamento: TAction;
+    acClima: TAction;
+    acFolha_Pagamento: TAction;
+    dxNavBar1: TdxNavBar;
+    dxNavBar1GroupDica: TdxNavBarGroup;
+    dxNavBar1GroupMovimentacao: TdxNavBarGroup;
+    dxNavBar1GroupRelatorios: TdxNavBarGroup;
+    dxNavBarDicaFinanceiro: TdxNavBarItem;
+    dxNavBarDicaEstoque: TdxNavBarItem;
+    dxNavBarDicaCadastro: TdxNavBarItem;
+    dxNavBarMovimentacaoSafra: TdxNavBarItem;
+    dxNavBarMovimentacaoFinanceiro: TdxNavBarItem;
+    acDica_Financeiro: TAction;
+    acDica_Estoque: TAction;
+    acDica_Cadastro: TAction;
+    acRel_Visao_Geral_Safra: TAction;
+    dxNavBarRelVisaoGeral: TdxNavBarItem;
+    acRel_Estoque_Grao: TAction;
+    dxNavBarRelEstoqueGrao: TdxNavBarItem;
+    procedure acCadastro_CidadeExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure acCadastro_AtividadeExecute(Sender: TObject);
+    procedure acCadastro_Grupo_ProdutoExecute(Sender: TObject);
+    procedure acCadastro_MarcaExecute(Sender: TObject);
+    procedure acCadastro_Variedade_CulturaExecute(Sender: TObject);
+    procedure acCadastro_SafraExecute(Sender: TObject);
+    procedure acCadastro_TalhaoExecute(Sender: TObject);
+    procedure acCadastro_ProdutoExecute(Sender: TObject);
+    procedure acRegistro_AtividadesExecute(Sender: TObject);
+    procedure acConsulta_AtividadesExecute(Sender: TObject);
+    procedure acCadastro_PessoaExecute(Sender: TObject);
+    procedure VeículosExecute(Sender: TObject);
+    procedure acContratoExecute(Sender: TObject);
+    procedure acVendaExecute(Sender: TObject);
+    procedure acCadastro_ServicoExecute(Sender: TObject);
+    procedure acManutencao_MaquinaExecute(Sender: TObject);
+    procedure acCadastro_OcorrenciaExecute(Sender: TObject);
+    procedure acCadastro_Plano_FinanceiroExecute(Sender: TObject);
+    procedure acCadastro_Tipo_DocumentoExecute(Sender: TObject);
+    procedure acCadastro_DepartamentoExecute(Sender: TObject);
+    procedure acCadastro_Condicao_PagamentoExecute(Sender: TObject);
+    procedure acLancamento_FinanceiroExecute(Sender: TObject);
+    procedure acCadastro_Conta_BancariaExecute(Sender: TObject);
+    procedure acCadastro_Operacao_BancariaExecute(Sender: TObject);
+    procedure acCadastro_ChequeExecute(Sender: TObject);
+    procedure acLancamento_BancoExecute(Sender: TObject);
+    procedure acBaixar_ContasExecute(Sender: TObject);
+    procedure acEntrada_ProdutoExecute(Sender: TObject);
+    procedure acConciliacao_BancariaExecute(Sender: TObject);
+    procedure Timer2Timer(Sender: TObject);
+    procedure acCadastro_PluviometroExecute(Sender: TObject);
+    procedure acCadastro_Item_Folha_PagamentoExecute(Sender: TObject);
+    procedure acClimaExecute(Sender: TObject);
+    procedure acFolha_PagamentoExecute(Sender: TObject);
+    procedure acDica_FinanceiroExecute(Sender: TObject);
+    procedure acDica_EstoqueExecute(Sender: TObject);
+    procedure acDica_CadastroExecute(Sender: TObject);
+    procedure acRel_Visao_Geral_SafraExecute(Sender: TObject);
+    procedure acRel_Estoque_GraoExecute(Sender: TObject);
+  private
+    Op: TOperacoes;
+    FPropriedade: TPropriedadeEntidade;
+    FUsuario: TLoginEntidade;
+    procedure CarregaForm(Pacote, Classe: String);
+    { Private declarativons }
+  public
+    constructor Create(AOwner: TComponent); overload ;
+    constructor Create(AOwner: TComponent; FPropriedade: TPropriedadeEntidade; FUsuario: TLoginEntidade); overload;
+    { Public declarations }
+  end;
+
+var
+  FrmPrincipal: TFrmPrincipal;
+
+implementation
+
+uses
+  UAtualiza_BD;
+
+{$R *.dfm}
+
+procedure TFrmPrincipal.CarregaForm(Pacote, Classe: String);
+var
+  FormClass: TFormClass;
+  Formulario: TFrmPrincipal;
+  HandlePack: HModule;
+begin
+  {HandlePack := LoadPackage(Pacote);
+  try
+    if HandlePack > 0 then
+    begin
+      FormClass := TFormClass(GetClass('TFrmCadastro_Cidade'));
+      Formulario := TFrmPrincipal(FormClass.Create(self));
+      Formulario.Show;
+    end;
+  finally
+
+  end; }
+end;
+
+constructor TFrmPrincipal.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+end;
+
+constructor TFrmPrincipal.Create(AOwner: TComponent;
+  FPropriedade: TPropriedadeEntidade; FUsuario: TLoginEntidade);
+begin
+  //inherited Create(AOwner);
+  Self.FPropriedade:= FPropriedade;
+  Self.FUsuario:= FUsuario;
+  StbStatus.Panels[0].Text:= 'Fazenda: '+IntToStr(FPropriedade.Codigo)+'-'+FPropriedade.NomeFazenda;
+  StbStatus.Panels[1].Text:= 'Usuário Registrado: '+IntToStr(FUsuario.Codigo)+'-'+FUsuario.Login;
+  if FileExists(ExtractFilePath(Application.ExeName)+'\TraducaoDev.ini') then {Verifica se existe o arquivo dentro da pasta}
+  begin
+    cxLocalizer1.LoadFromFile(ExtractFilePath(Application.ExeName)+'\TraducaoDev.ini');
+    cxLocalizer1.LanguageIndex := 1; {Muda o idioma / linguagem}
+    cxLocalizer1.Active := TRUE;     {Ativa o componente / a tradução}
+  end;
+end;
+
+procedure TFrmPrincipal.acBaixar_ContasExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmLista_Lancamento_Financeiro, FrmLista_Lancamento_Financeiro);
+  FrmLista_Lancamento_Financeiro.Create(FPropriedade, FUsuario);
+  FrmLista_Lancamento_Financeiro.Show;
+  Op.CentralizaForm(FrmLista_Lancamento_Financeiro, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_AtividadeExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Atividade, FrmCadastro_Atividade);
+  FrmCadastro_Atividade.Create(FPropriedade, FUsuario);
+  FrmCadastro_Atividade.Show;
+  Op.CentralizaForm(FrmCadastro_Atividade, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_ChequeExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Cheque, FrmCadastro_Cheque);
+  FrmCadastro_Cheque.Create(FPropriedade, FUsuario);
+  FrmCadastro_Cheque.Show;
+  Op.CentralizaForm(FrmCadastro_Cheque, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_CidadeExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Cidade, FrmCadastro_Cidade);
+  FrmCadastro_Cidade.Create(FPropriedade, FUsuario);
+  FrmCadastro_Cidade.Show;
+  Op.CentralizaForm(FrmCadastro_Cidade, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+  //CarregaForm('PctCidade.bpl', 'TFrmCadastro_Cidade');
+  {Application.CreateForm(TFrmCadastro_Cidade, FrmCadastro_Cidade);
+  FrmCadastro_Cidade.Show;
+  Op.CentralizaForm(FrmCadastro_Cidade, FrmPrincipal, Ribbon1.Height, StbStatus.Height);}
+end;
+
+procedure TFrmPrincipal.acCadastro_Condicao_PagamentoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Condicao_Pagamento, FrmCadastro_Condicao_Pagamento);
+  FrmCadastro_Condicao_Pagamento.Create(FPropriedade, FUsuario);
+  FrmCadastro_Condicao_Pagamento.Show;
+  Op.CentralizaForm(FrmCadastro_Condicao_Pagamento, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_Conta_BancariaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Conta_Bancaria, FrmCadastro_Conta_Bancaria);
+  FrmCadastro_Conta_Bancaria.Create(FPropriedade, FUsuario);
+  FrmCadastro_Conta_Bancaria.Show;
+  Op.CentralizaForm(FrmCadastro_Conta_Bancaria, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_DepartamentoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Departamento, FrmCadastro_Departamento);
+  FrmCadastro_Departamento.Create(FPropriedade, FUsuario);
+  FrmCadastro_Departamento.Show;
+  Op.CentralizaForm(FrmCadastro_Departamento, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_Grupo_ProdutoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Grupo_Produto, FrmCadastro_Grupo_Produto);
+  FrmCadastro_Grupo_Produto.Create(FPropriedade, FUsuario);
+  FrmCadastro_Grupo_Produto.Show;
+  Op.CentralizaForm(FrmCadastro_Grupo_Produto, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_Item_Folha_PagamentoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Item_Folha_Pagamento, FrmCadastro_Item_Folha_Pagamento);
+  FrmCadastro_Item_Folha_Pagamento.Create(FPropriedade, FUsuario);
+  FrmCadastro_Item_Folha_Pagamento.Show;
+  Op.CentralizaForm(FrmCadastro_Item_Folha_Pagamento, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_MarcaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Marca, FrmCadastro_Marca);
+  FrmCadastro_Marca.Create(FPropriedade, FUsuario);
+  FrmCadastro_Marca.Show;
+  Op.CentralizaForm(FrmCadastro_Marca, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_OcorrenciaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Ocorrencia, FrmCadastro_Ocorrencia);
+  FrmCadastro_Ocorrencia.Create(FPropriedade, FUsuario);
+  FrmCadastro_Ocorrencia.Show;
+  Op.CentralizaForm(FrmCadastro_Ocorrencia, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_Operacao_BancariaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Operacao_Bancaria, FrmCadastro_Operacao_Bancaria);
+  FrmCadastro_Operacao_Bancaria.Create(FPropriedade, FUsuario);
+  FrmCadastro_Operacao_Bancaria.Show;
+  Op.CentralizaForm(FrmCadastro_Operacao_Bancaria, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_PessoaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Pessoa, FrmCadastro_Pessoa);
+  FrmCadastro_Pessoa.Create(FPropriedade, FUsuario);
+  FrmCadastro_Pessoa.Show;
+  Op.CentralizaForm(FrmCadastro_Pessoa, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_Plano_FinanceiroExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Plano_Financeiro, FrmCadastro_Plano_Financeiro);
+  FrmCadastro_Plano_Financeiro.Create(FPropriedade, FUsuario);
+  FrmCadastro_Plano_Financeiro.Show;
+  Op.CentralizaForm(FrmCadastro_Plano_Financeiro, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_PluviometroExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Pluviometro, FrmCadastro_Pluviometro);
+  FrmCadastro_Pluviometro.Create(FPropriedade, FUsuario);
+  FrmCadastro_Pluviometro.Show;
+  Op.CentralizaForm(FrmCadastro_Pluviometro, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_ProdutoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Produto, FrmCadastro_Produto);
+  FrmCadastro_Produto.Create(FPropriedade, FUsuario);
+  FrmCadastro_Produto.Show;
+  Op.CentralizaForm(FrmCadastro_Produto, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_SafraExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Safra, FrmCadastro_Safra);
+  FrmCadastro_Safra.Create(FPropriedade, FUsuario);
+  FrmCadastro_Safra.Show;
+  Op.CentralizaForm(FrmCadastro_Safra, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_ServicoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Servico, FrmCadastro_Servico);
+  FrmCadastro_Servico.Create(FPropriedade, FUsuario);
+  FrmCadastro_Servico.Show;
+  Op.CentralizaForm(FrmCadastro_Servico, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_TalhaoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Talhao, FrmCadastro_Talhao);
+  FrmCadastro_Talhao.Create(FPropriedade, FUsuario);
+  FrmCadastro_Talhao.Show;
+  Op.CentralizaForm(FrmCadastro_Talhao, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_Tipo_DocumentoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Tipo_Documento, FrmCadastro_Tipo_Documento);
+  FrmCadastro_Tipo_Documento.Create(FPropriedade, FUsuario);
+  FrmCadastro_Tipo_Documento.Show;
+  Op.CentralizaForm(FrmCadastro_Tipo_Documento, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acCadastro_Variedade_CulturaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Variedade_Cultura, FrmCadastro_Variedade_Cultura);
+  FrmCadastro_Variedade_Cultura.Create(FPropriedade, FUsuario);
+  FrmCadastro_Variedade_Cultura.Show;
+  Op.CentralizaForm(FrmCadastro_Variedade_Cultura, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acClimaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmDados_Clima, FrmDados_Clima);
+  FrmDados_Clima.Create(FPropriedade, FUsuario);
+  FrmDados_Clima.Show;
+  Op.CentralizaForm(FrmDados_Clima, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acConciliacao_BancariaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmConciliacao_Bancaria, FrmConciliacao_Bancaria);
+  FrmConciliacao_Bancaria.Create(FPropriedade, FUsuario);
+  FrmConciliacao_Bancaria.Show;
+  Op.CentralizaForm(FrmConciliacao_Bancaria, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acConsulta_AtividadesExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRel_Atividades, FrmRel_Atividades);
+  FrmRel_Atividades.Create(FPropriedade, FUsuario);
+  FrmRel_Atividades.Show;
+  Op.CentralizaForm(FrmRel_Atividades, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acRegistro_AtividadesExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRegistro_Atividade, FrmRegistro_Atividade);
+  FrmRegistro_Atividade.Create(FPropriedade, FUsuario);
+  FrmRegistro_Atividade.Show;
+  Op.CentralizaForm(FrmRegistro_Atividade, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acRel_Estoque_GraoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRel_Estoque_Grao, FrmRel_Estoque_Grao);
+  FrmRel_Estoque_Grao.Create(FPropriedade, FUsuario);
+  FrmRel_Estoque_Grao.Show;
+  Op.CentralizaForm(FrmRel_Estoque_Grao, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+
+end;
+
+procedure TFrmPrincipal.acRel_Visao_Geral_SafraExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRel_Visao_Geral, FrmRel_Visao_Geral);
+  FrmRel_Visao_Geral.Create(FPropriedade, FUsuario);
+  FrmRel_Visao_Geral.Show;
+  Op.CentralizaForm(FrmRel_Visao_Geral, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acDica_CadastroExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmDica_Cadastro, FrmDica_Cadastro);
+  FrmDica_Cadastro.Show;
+  Op.CentralizaForm(FrmDica_Cadastro, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acDica_EstoqueExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmDica_Estoque, FrmDica_Estoque);
+  FrmDica_Estoque.Show;
+  Op.CentralizaForm(FrmDica_Estoque, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acDica_FinanceiroExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmDica_Financeiro, FrmDica_Financeiro);
+  FrmDica_Financeiro.Show;
+  Op.CentralizaForm(FrmDica_Financeiro, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+  //Op.CentralizaForm(FrmDica_Financeiro, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acVendaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmContrato_Venda, FrmContrato_Venda);
+  FrmContrato_Venda.Create(FPropriedade, FUsuario);
+  FrmContrato_Venda.Show;
+  Op.CentralizaForm(FrmContrato_Venda, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acContratoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmContrato, FrmContrato);
+  FrmContrato.Create(FPropriedade, FUsuario);
+  FrmContrato.Show;
+  Op.CentralizaForm(FrmContrato, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acEntrada_ProdutoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmEntrada_Produto, FrmEntrada_Produto);
+  FrmEntrada_Produto.Create(FPropriedade, FUsuario);
+  FrmEntrada_Produto.Show;
+  Op.CentralizaForm(FrmEntrada_Produto, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+
+end;
+
+procedure TFrmPrincipal.acFolha_PagamentoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmFolha_Pagamento, FrmFolha_Pagamento);
+  FrmFolha_Pagamento.Create(FPropriedade, FUsuario);
+  FrmFolha_Pagamento.Show;
+  Op.CentralizaForm(FrmFolha_Pagamento, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acLancamento_BancoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmLancamento_Banco, FrmLancamento_Banco);
+  FrmLancamento_Banco.Create(FPropriedade, FUsuario);
+  FrmLancamento_Banco.Show;
+  Op.CentralizaForm(FrmLancamento_Banco, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acLancamento_FinanceiroExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmLancamento_Financeiro, FrmLancamento_Financeiro);
+  FrmLancamento_Financeiro.Create(FPropriedade, FUsuario);
+  FrmLancamento_Financeiro.Show;
+  Op.CentralizaForm(FrmLancamento_Financeiro, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acManutencao_MaquinaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmManutencao_Maquina, FrmManutencao_Maquina);
+  FrmManutencao_Maquina.Create(FPropriedade, FUsuario);
+  FrmManutencao_Maquina.Show;
+  Op.CentralizaForm(FrmManutencao_Maquina, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.FormCreate(Sender: TObject);
+begin
+  if FileExists(ExtractFilePath(Application.ExeName)+'\TraducaoDev.ini') then
+  begin
+    cxLocalizer1.LoadFromFile(ExtractFilePath(Application.ExeName)+'\TraducaoDev.ini');
+    cxLocalizer1.LanguageIndex := 1; //Muda o idioma / linguagem
+    cxLocalizer1.Active := TRUE;     //Ativa o componente / a tradução
+  end;
+
+  //StbStatus.Panels[0].Text:= 'Fazenda: '+FPropriedade.NomeFazenda;
+  Application.HintHidePause:= 10000;
+end;
+
+procedure TFrmPrincipal.Timer2Timer(Sender: TObject);
+var
+  hora: string;
+begin
+  //StbStatus.Panels[4].Text := TimeToStr(time);
+
+  case DayOfWeek(date) of
+    1:
+      StbStatus.Panels[3].Text := FormatDateTime('DDDDDD',date);
+    2:
+      StbStatus.Panels[3].Text := FormatDateTime('DDDDDD',date);
+    3:
+      StbStatus.Panels[3].Text := FormatDateTime('DDDDDD',date);
+    4:
+      StbStatus.Panels[3].Text := FormatDateTime('DDDDDD',date);
+    5:
+      StbStatus.Panels[3].Text := FormatDateTime('DDDDDD',date);
+    6:
+      StbStatus.Panels[3].Text := FormatDateTime('DDDDDD',date);
+    7:
+      StbStatus.Panels[3].Text := FormatDateTime('DDDDDD',date);
+  end;
+
+  hora := TimeToStr(time);
+  delete(hora, 3, 6);
+
+  if (StrToInt(hora) >= 0) and (StrToInt(hora) < 12) then
+    StbStatus.Panels[2].Text := 'Bom Dia'
+  else if (StrToInt(hora) >= 12) and (StrToInt(hora) < 18) then
+    StbStatus.Panels[2].Text := 'Boa Tarde'
+  else
+    StbStatus.Panels[2].Text := 'Boa Noite';
+end;
+
+procedure TFrmPrincipal.VeículosExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadastro_Veiculo, FrmCadastro_Veiculo);
+  FrmCadastro_Veiculo.Create(FPropriedade, FUsuario);
+  FrmCadastro_Veiculo.Show;
+  Op.CentralizaForm(FrmCadastro_Veiculo, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+end.
