@@ -1,7 +1,7 @@
 object FrmEscolha_Propriedade: TFrmEscolha_Propriedade
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
+  BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Escolha a propriedade'
   ClientHeight = 226
@@ -59,10 +59,14 @@ object FrmEscolha_Propriedade: TFrmEscolha_Propriedade
     TabOrder = 2
     object cxGrid1DBBandedTableView1: TcxGridDBBandedTableView
       Navigator.Buttons.CustomButtons = <>
+      FilterBox.CustomizeDialog = False
+      FilterBox.Visible = fvNever
       DataController.DataSource = dsPropriedade
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
+      FilterRow.Visible = True
+      OptionsView.ScrollBars = ssNone
       OptionsView.ExpandButtonsForEmptyDetails = False
       OptionsView.GroupByBox = False
       Bands = <
@@ -103,8 +107,6 @@ object FrmEscolha_Propriedade: TFrmEscolha_Propriedade
     end
   end
   object qryPropriedade: TADOQuery
-    Active = True
-    Connection = DM.ADOConnection1
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -157,5 +159,9 @@ object FrmEscolha_Propriedade: TFrmEscolha_Propriedade
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
     end
+  end
+  object cxLocalizer1: TcxLocalizer
+    Left = 88
+    Top = 288
   end
 end

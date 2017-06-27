@@ -65,6 +65,7 @@ type
     FLogin: TLoginEntidade;
     FLoginDominio: TLoginDominio;
     FComandoSQL: TComandoSQLEntidade;
+    Conexao: TADOConnection;
   public
     ativo, enderec, achei: boolean;
     FUsuario: TLoginEntidade;
@@ -76,7 +77,7 @@ var
   FrmLogin: TFrmLogin;
 implementation
 
-uses UDM, UPrincipal, UEscolha_Propriedade;
+uses UDM, UPrincipal, UEscolha_Propriedade, OperacoesConexao;
 
 {$R *.dfm}
 
@@ -85,6 +86,8 @@ uses UDM, UPrincipal, UEscolha_Propriedade;
 constructor TFrmLogin.Create(AOwnder: TComponent);
 begin
   inherited Create(AOwnder);
+  Conexao:= TOperacoesConexao.NovaConexao(Conexao);
+  TOperacoesConexao.IniciaQuerys([qryConsulta], Conexao);
 end;
 
 procedure TFrmLogin.cxButton1Click(Sender: TObject);
@@ -92,7 +95,8 @@ var
   Retorno: AnsiString;
 begin
   FUsuario:= TLoginEntidade.Create;
-  FLoginDominio:= TLoginDominio.Create(dm.ADOConnection1);
+  FLoginDominio:= TLoginDominio.Create(Conexao);
+
   if (FLoginDominio.Buscar(qryConsulta, EdtUsuario.Text, EdtSenha.Text, Retorno)=0) then
   begin
     Mensagens.MensagemErro('Usuário não encontrado.');
@@ -124,7 +128,9 @@ end;
 
 procedure TFrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  TOperacoesConexao.ConfirmaConexao(Conexao);
   Action:= caFree;
+  //Action:= caFree;
   //FrmLogin:= nil;
 end;
 

@@ -1,4 +1,4 @@
-unit UEscolha_Propriedade;
+unit ULogin;
 
 interface
 
@@ -28,32 +28,26 @@ uses
   dxPScxEditorProducers, dxPScxExtEditorProducers, dxSkinsdxBarPainter,
   dxPSCore, dxPScxCommon, cxPropertiesStore, cxEditRepositoryItems, MetodosBasicos,
   AtividadeEntidade, AtividadeDominio, Vcl.Menus, cxButtons, LoginEntidade,
-  LoginDominio, PropriedadeEntidade, cxGridBandedTableView,
-  cxGridDBBandedTableView;
+  LoginDominio;
 
 type
-  TFrmEscolha_Propriedade = class(TForm)
-    qryPropriedade: TADOQuery;
-    dsPropriedade: TDataSource;
+  TFrmLogin = class(TForm)
+    qryConsulta: TADOQuery;
+    dsConsulta: TDataSource;
+    LblMarca: TLabel;
+    EdtUsuario: TEdit;
+    Label1: TLabel;
+    EdtSenha: TEdit;
     cxButton1: TcxButton;
     cxButton2: TcxButton;
-    qryPropriedadeCodigo: TIntegerField;
-    qryPropriedadeData_Cadastro: TDateTimeField;
-    qryPropriedadeNome: TStringField;
-    qryPropriedadeEndereco: TStringField;
-    qryPropriedadeCidade: TStringField;
-    qryPropriedadeSetor: TStringField;
-    qryPropriedadeTipo_Pessoa: TStringField;
-    cxGrid1Level1: TcxGridLevel;
-    cxGrid1: TcxGrid;
-    cxGrid1DBBandedTableView1: TcxGridDBBandedTableView;
-    cxGrid1DBBandedTableView1Nome: TcxGridDBBandedColumn;
-    cxGrid1DBBandedTableView1Endereco: TcxGridDBBandedColumn;
-    cxGrid1DBBandedTableView1Cidade: TcxGridDBBandedColumn;
-    cxStyleRepository1: TcxStyleRepository;
-    cxStyle1: TcxStyle;
+    qryConsultaCodigo: TIntegerField;
+    qryConsultaNome: TStringField;
+    qryConsultaLogin: TStringField;
+    qryConsultaSenha: TStringField;
+    qryConsultaCodigo_Perfil: TIntegerField;
+    qryConsultaData_Cadastro: TDateTimeField;
+    Image1: TImage;
     Shape1: TShape;
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormActivate(Sender: TObject);
@@ -69,92 +63,89 @@ type
     Mensagens: TMensagens;
     Log: TLog;
     GeraCodigo: TGeradorDeCodigo;
-    FPropriedade: TPropriedadeEntidade;
-    FUsuario: TLoginEntidade;
+    FLogin: TLoginEntidade;
     FLoginDominio: TLoginDominio;
     FComandoSQL: TComandoSQLEntidade;
+    Conexao: TADOConnection;
   public
     ativo, enderec, achei: boolean;
-
-    constructor Create(AOwnder: TComponent); overload;
-    constructor Create(AOwnder: TComponent; FUsuario: TLoginEntidade); overload;
+    FUsuario: TLoginEntidade;
+    constructor Create(AOwnder: TComponent);
   protected
   end;
 
 var
-  FrmEscolha_Propriedade: TFrmEscolha_Propriedade;
+  FrmLogin: TFrmLogin;
 implementation
 
-uses UDM, UPrincipal, ULogin;
+uses UDM, UPrincipal, UEscolha_Propriedade, OperacoesConexao;
 
 {$R *.dfm}
 
 { TFrmPadrao }
 
-constructor TFrmEscolha_Propriedade.Create(AOwnder: TComponent);
+constructor TFrmLogin.Create(AOwnder: TComponent);
 begin
   inherited Create(AOwnder);
 end;
 
-constructor TFrmEscolha_Propriedade.Create(AOwnder: TComponent;
-  FUsuario: TLoginEntidade);
-begin
-  Self.FUsuario:= FUsuario;
-  //inherited Create(AOwnder);
-end;
-
-procedure TFrmEscolha_Propriedade.cxButton1Click(Sender: TObject);
+procedure TFrmLogin.cxButton1Click(Sender: TObject);
 var
   Retorno: AnsiString;
 begin
-  FPropriedade:= TPropriedadeEntidade.Create;
-  FPropriedade.Codigo:= qryPropriedadeCodigo.AsInteger;
-  FPropriedade.NomeFazenda:= qryPropriedadeNome.AsString;
+  FUsuario:= TLoginEntidade.Create;
+  FLoginDominio:= TLoginDominio.Create(Conexao);
 
-  Application.CreateForm(TFrmPrincipal, FrmPrincipal);
-  FrmPrincipal.Create(Self, FPropriedade, FUsuario);
-  ModalResult:= mrOk;
-  //Application.Run;
+  if (FLoginDominio.Buscar(qryConsulta, EdtUsuario.Text, EdtSenha.Text, Retorno)=0) then
+  begin
+    Mensagens.MensagemErro('Usuário não encontrado.');
+    EdtUsuario.SetFocus;
+  end
+  else
+  begin
+    FUsuario.Codigo:= qryConsultaCodigo.AsInteger;
+    FUsuario.Login:= qryConsultaNome.AsString;
+    FUsuario.Senha:= qryConsultaSenha.AsString;
+    ModalResult:= mrOk;
+    //Application.CreateForm(TFrmEscolha_Propriedade, FrmEscolha_Propriedade);
+    //FrmEscolha_Propriedade:= TFrmEscolha_Propriedade.Create(nil);
+    //FrmEscolha_Propriedade.ShowModal;
+    //FrmEscolha_Propriedade.Release;
+    //FrmLogin.Close;
+  end;
 end;
 
-procedure TFrmEscolha_Propriedade.cxButton2Click(Sender: TObject);
+procedure TFrmLogin.cxButton2Click(Sender: TObject);
 begin
-  //FrmEscolha_Propriedade.Release;
-  //Application.Terminate;
   Close;
 end;
 
-procedure TFrmEscolha_Propriedade.FormActivate(Sender: TObject);
+procedure TFrmLogin.FormActivate(Sender: TObject);
 begin
   ativo:= true;
 end;
 
-procedure TFrmEscolha_Propriedade.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action:= caFree;
-  //FrmEscolha_Propriedade:= Nil;
+  TOperacoesConexao.ConfirmaConexao(Conexao);
+  FrmLogin.Release;
+  //Action:= caFree;
+  //FrmLogin:= nil;
 end;
 
-procedure TFrmEscolha_Propriedade.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
-begin
-  //FrmEscolha_Propriedade.Free;
-  //FrmEscolha_Propriedade:= Nil;
-end;
-
-procedure TFrmEscolha_Propriedade.FormDeactivate(Sender: TObject);
+procedure TFrmLogin.FormDeactivate(Sender: TObject);
 begin
   ativo:= false;
 end;
 
-procedure TFrmEscolha_Propriedade.FormKeyDown(Sender: TObject; var Key: Word;
+procedure TFrmLogin.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if (key = vk_escape) then
     close;
 end;
 
-procedure TFrmEscolha_Propriedade.FormKeyPress(Sender: TObject; var Key: Char);
+procedure TFrmLogin.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if key=#13 then
   begin
@@ -163,12 +154,13 @@ begin
   end;
 end;
 
-procedure TFrmEscolha_Propriedade.FormShow(Sender: TObject);
+procedure TFrmLogin.FormShow(Sender: TObject);
 begin
-  //FrmLogin.Close;
+  Conexao:= TOperacoesConexao.NovaConexao(Conexao);
+  TOperacoesConexao.IniciaQuerys([qryConsulta], Conexao);
 end;
 
-procedure TFrmEscolha_Propriedade.MEdtData_CadastroExit(Sender: TObject);
+procedure TFrmLogin.MEdtData_CadastroExit(Sender: TObject);
 begin
 end;
 

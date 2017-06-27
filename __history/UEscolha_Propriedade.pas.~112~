@@ -96,8 +96,6 @@ uses UDM, UPrincipal, ULogin, OperacoesConexao;
 constructor TFrmEscolha_Propriedade.Create(AOwnder: TComponent);
 begin
   inherited Create(AOwnder);
-  Conexao:= TOperacoesConexao.NovaConexao(Conexao);
-  TOperacoesConexao.IniciaQuerys([qryPropriedade], Conexao);
 end;
 
 constructor TFrmEscolha_Propriedade.Create(AOwnder: TComponent;
@@ -117,6 +115,7 @@ begin
 
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   FrmPrincipal.Create(Self, FPropriedade, FUsuario);
+  TOperacoesConexao.ConfirmaConexao(Conexao);
   ModalResult:= mrOk;
   //Application.Run;
 end;
@@ -176,6 +175,8 @@ begin
     cxLocalizer1.LanguageIndex := 1; {Muda o idioma / linguagem}
     cxLocalizer1.Active := TRUE;     {Ativa o componente / a tradução}
   end;
+  Conexao:= TOperacoesConexao.NovaConexao(Conexao);
+  TOperacoesConexao.IniciaQuerys([qryPropriedade], Conexao);
 
   qryPropriedade.Close;
   qryPropriedade.Open;

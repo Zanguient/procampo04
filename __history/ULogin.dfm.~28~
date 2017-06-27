@@ -599,6 +599,7 @@ object FrmLogin: TFrmLogin
     OnClick = cxButton2Click
   end
   object qryConsulta: TADOQuery
+    Connection = DM.ADOConnection1
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (

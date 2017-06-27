@@ -70,6 +70,7 @@ type
     Mensagens: TMensagens;
     Log: TLog;
     GeraCodigo: TGeradorDeCodigo;
+    Conexao: TADOConnection;
     FPropriedade: TPropriedadeEntidade;
     FUsuario: TLoginEntidade;
     FLoginDominio: TLoginDominio;
@@ -86,7 +87,7 @@ var
   FrmEscolha_Propriedade: TFrmEscolha_Propriedade;
 implementation
 
-uses UDM, UPrincipal, ULogin;
+uses UDM, UPrincipal, ULogin, OperacoesConexao;
 
 {$R *.dfm}
 
@@ -172,6 +173,11 @@ begin
     cxLocalizer1.LanguageIndex := 1; {Muda o idioma / linguagem}
     cxLocalizer1.Active := TRUE;     {Ativa o componente / a tradução}
   end;
+  Conexao:= TOperacoesConexao.NovaConexao(Conexao);
+  TOperacoesConexao.IniciaQuerys([qryPropriedade], Conexao);
+  TOperacoesConexao.ConfirmaConexao(Conexao);
+  qryPropriedade.Close;
+  qryPropriedade.Open;
   //FrmLogin.Close;
 end;
 

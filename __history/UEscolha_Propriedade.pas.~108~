@@ -29,7 +29,7 @@ uses
   dxPSCore, dxPScxCommon, cxPropertiesStore, cxEditRepositoryItems, MetodosBasicos,
   AtividadeEntidade, AtividadeDominio, Vcl.Menus, cxButtons, LoginEntidade,
   LoginDominio, PropriedadeEntidade, cxGridBandedTableView,
-  cxGridDBBandedTableView;
+  cxGridDBBandedTableView, cxLocalization;
 
 type
   TFrmEscolha_Propriedade = class(TForm)
@@ -53,6 +53,7 @@ type
     cxStyleRepository1: TcxStyleRepository;
     cxStyle1: TcxStyle;
     Shape1: TShape;
+    cxLocalizer1: TcxLocalizer;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
@@ -69,6 +70,7 @@ type
     Mensagens: TMensagens;
     Log: TLog;
     GeraCodigo: TGeradorDeCodigo;
+    Conexao: TADOConnection;
     FPropriedade: TPropriedadeEntidade;
     FUsuario: TLoginEntidade;
     FLoginDominio: TLoginDominio;
@@ -85,7 +87,7 @@ var
   FrmEscolha_Propriedade: TFrmEscolha_Propriedade;
 implementation
 
-uses UDM, UPrincipal, ULogin;
+uses UDM, UPrincipal, ULogin, OperacoesConexao;
 
 {$R *.dfm}
 
@@ -113,6 +115,7 @@ begin
 
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   FrmPrincipal.Create(Self, FPropriedade, FUsuario);
+  TOperacoesConexao.ConfirmaConexao(Conexao);
   ModalResult:= mrOk;
   //Application.Run;
 end;
@@ -121,6 +124,7 @@ procedure TFrmEscolha_Propriedade.cxButton2Click(Sender: TObject);
 begin
   //FrmEscolha_Propriedade.Release;
   //Application.Terminate;
+  Close;
 end;
 
 procedure TFrmEscolha_Propriedade.FormActivate(Sender: TObject);
@@ -130,6 +134,7 @@ end;
 
 procedure TFrmEscolha_Propriedade.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  TOperacoesConexao.ConfirmaConexao(Conexao);
   Action:= caFree;
   //FrmEscolha_Propriedade:= Nil;
 end;
@@ -164,6 +169,17 @@ end;
 
 procedure TFrmEscolha_Propriedade.FormShow(Sender: TObject);
 begin
+  if FileExists(ExtractFilePath(Application.ExeName)+'\TraducaoDev.ini') then {Verifica se existe o arquivo dentro da pasta}
+  begin
+    cxLocalizer1.LoadFromFile(ExtractFilePath(Application.ExeName)+'\TraducaoDev.ini');
+    cxLocalizer1.LanguageIndex := 1; {Muda o idioma / linguagem}
+    cxLocalizer1.Active := TRUE;     {Ativa o componente / a tradução}
+  end;
+  Conexao:= TOperacoesConexao.NovaConexao(Conexao);
+  TOperacoesConexao.IniciaQuerys([qryPropriedade], Conexao);
+
+  qryPropriedade.Close;
+  qryPropriedade.Open;
   //FrmLogin.Close;
 end;
 

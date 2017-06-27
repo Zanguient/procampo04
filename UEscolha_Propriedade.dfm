@@ -107,7 +107,6 @@ object FrmEscolha_Propriedade: TFrmEscolha_Propriedade
     end
   end
   object qryPropriedade: TADOQuery
-    Connection = DM.ADOConnection1
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (

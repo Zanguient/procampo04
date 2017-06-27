@@ -30,7 +30,7 @@ object FrmLogin: TFrmLogin
     Height = 185
   end
   object LblMarca: TLabel
-    Left = 72
+    Left = 84
     Top = 39
     Width = 43
     Height = 13
@@ -43,7 +43,7 @@ object FrmLogin: TFrmLogin
     ParentFont = False
   end
   object Label1: TLabel
-    Left = 72
+    Left = 84
     Top = 87
     Width = 35
     Height = 13
@@ -552,7 +552,7 @@ object FrmLogin: TFrmLogin
       FFFF}
   end
   object EdtUsuario: TEdit
-    Left = 72
+    Left = 84
     Top = 54
     Width = 121
     Height = 17
@@ -565,7 +565,7 @@ object FrmLogin: TFrmLogin
     TabOrder = 0
   end
   object EdtSenha: TEdit
-    Left = 72
+    Left = 84
     Top = 102
     Width = 121
     Height = 17
@@ -575,10 +575,11 @@ object FrmLogin: TFrmLogin
     BorderStyle = bsNone
     CharCase = ecUpperCase
     MaxLength = 50
+    PasswordChar = '*'
     TabOrder = 1
   end
   object cxButton1: TcxButton
-    Left = 20
+    Left = 31
     Top = 152
     Width = 87
     Height = 25
@@ -588,7 +589,7 @@ object FrmLogin: TFrmLogin
     OnClick = cxButton1Click
   end
   object cxButton2: TcxButton
-    Left = 154
+    Left = 165
     Top = 152
     Width = 87
     Height = 25
@@ -598,7 +599,6 @@ object FrmLogin: TFrmLogin
     OnClick = cxButton2Click
   end
   object qryConsulta: TADOQuery
-    Connection = DM.ADOConnection1
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (

@@ -117,6 +117,7 @@ begin
 
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   FrmPrincipal.Create(Self, FPropriedade, FUsuario);
+  TOperacoesConexao.ConfirmaConexao(Conexao);
   ModalResult:= mrOk;
   //Application.Run;
 end;
