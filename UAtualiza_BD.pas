@@ -8,21 +8,24 @@ type
 implementation
 
 uses
-  ADODB, UDM, SysUtils;
+  ADODB, UDM, SysUtils, OperacoesConexao;
 
 { TAtualiza_BD }
 
 procedure TAtualiza_BD.Atualizacao;
 var
   qAux: TADOQuery;
+  Conexao: TADOConnection;
 begin
   qAux := TADOQuery.Create(nil);
+  Conexao:= TOperacoesConexao.NovaConexao(Conexao);
+  TOperacoesConexao.IniciaQuerys([qAux], Conexao);
   try
     try
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Pessoa') + '))');
@@ -49,7 +52,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Pessoa_Documentos') + '))');
@@ -73,7 +76,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Pessoa_Telefone') + '))');
@@ -96,7 +99,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Pessoa_Tipo') + '))');
@@ -118,7 +121,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Talhao') + '))');
@@ -144,7 +147,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Safra') + '))');
@@ -168,7 +171,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Marca') + '))');
@@ -192,7 +195,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Variedade_Cultura') + '))');
@@ -216,7 +219,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Grupo_Produtos') + '))');
@@ -240,7 +243,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Produtos') + '))');
@@ -278,7 +281,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Produtos_Aplicacao') + '))');
@@ -300,7 +303,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Veiculo') + '))');
@@ -336,7 +339,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade') + '))');
@@ -362,7 +365,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Colheita') + '))');
@@ -403,7 +406,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Atividades_Talhao') + '))');
@@ -427,7 +430,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Atividades') + '))');
@@ -454,7 +457,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Atividades_Produto') + '))');
@@ -480,7 +483,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Trabalho_Maquina') + '))');
@@ -512,7 +515,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Plantio') + '))');
@@ -546,7 +549,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Plantio_Ocorrencia') + '))');
@@ -575,7 +578,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Plantio_Estadio') + '))');
@@ -603,7 +606,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Contrato') + '))');
@@ -637,7 +640,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Contrato_Pagamento') + '))');
@@ -663,7 +666,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Estoque_Grao') + '))');
@@ -693,7 +696,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Contrato_Venda') + '))');
@@ -733,7 +736,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Manutencao_Maquina') + '))');
@@ -763,7 +766,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Manutencao_Maquina_Servico') + '))');
@@ -788,7 +791,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Manutencao_Maquina_Servico_Proxima_Revisao') + '))');
@@ -811,7 +814,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Manutencao_Maquina_Produto') + '))');
@@ -838,7 +841,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Servico') + '))');
@@ -862,7 +865,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Ocorrencia') + '))');
@@ -886,7 +889,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Condicao_Pagamento') + '))');
@@ -916,7 +919,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Tipo_Documento') + '))');
@@ -940,7 +943,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Departamento') + '))');
@@ -964,7 +967,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Plano_Financeiro') + '))');
@@ -992,7 +995,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Lancamento_Financeiro') + '))');
@@ -1031,7 +1034,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Lancamento_Financeiro_Codigo_Movimentacao') + '))');
@@ -1056,7 +1059,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Lancamento_Financeiro_Parcelas') + '))');
@@ -1087,7 +1090,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Conta_Bancaria') + '))');
@@ -1116,7 +1119,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Operacao_Bancaria') + '))');
@@ -1141,7 +1144,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Cheque') + '))');
@@ -1180,7 +1183,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Lancamento_Banco') + '))');
@@ -1216,7 +1219,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Atividade') + '))');
@@ -1240,7 +1243,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Cidade') + '))');
@@ -1266,7 +1269,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Historico_Usuario') + '))');
@@ -1293,7 +1296,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Historico_Movimentacao_Financeira') + '))');
@@ -1322,7 +1325,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Entrada_Produto') + '))');
@@ -1334,6 +1337,7 @@ begin
         add('N_Nota_Fiscal varchar(20), ');
         add('Data_Emissao datetime, ');
         add('Codigo_Fornecedor int, ');
+        add('Codigo_Comprador int, ');
         add('Codigo_Forma_Pagamento int, ');
         add('Codigo_Plano_Financeiro int, ');
         add('Codigo_Safra int, ');
@@ -1361,7 +1365,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Entrada_Produto_Produtos') + '))');
@@ -1388,7 +1392,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Estoque_Produto') + '))');
@@ -1416,7 +1420,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Pluviometro') + '))');
@@ -1440,7 +1444,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Cadastro_Item_Folha_Pagamento') + '))');
@@ -1465,7 +1469,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Dados_Clima') + '))');
@@ -1495,7 +1499,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Folha_Pagamento') + '))');
@@ -1530,7 +1534,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Folha_Pagamento_Itens') + '))');
@@ -1549,11 +1553,38 @@ begin
       end;
     end;
 
+    try
+      with qAux, sql do
+      begin
+        close;
+        Connection := Conexao;
+        clear;
+        add('if not exists(select 1 from syscolumns where id = object_id(' +
+          QuotedStr('Cadastro_Usuario') + '))');
+        add('CREATE TABLE Cadastro_Usuario ');
+        add('(Codigo int primary key not null, ');
+        add('Codigo_Propriedade int, ');
+        add('Codigo_Usuario int, ');
+        add('Nome varchar(50),');
+        add('Login varchar(20),');
+        add('Senha varchar(20),');
+        add('Codigo_Perfil int,');
+        add('Data_Cadastro datetime)');
+        ExecSQL;
+      end;
+    except
+      on E: Exception do
+      begin
+
+        abort;
+      end;
+    end;
+
     {try
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Atividades') + ')and name = ' +
@@ -1575,7 +1606,7 @@ begin
       with qAux, sql do
       begin
         close;
-        Connection := dm.ADOConnection1;
+        Connection := Conexao;
         clear;
         add('if not exists(select 1 from syscolumns where id = object_id(' +
           QuotedStr('Registro_Atividade_Plantio') + ')and name = ' +
@@ -1593,7 +1624,9 @@ begin
       end;
     end;}
   finally
-    FreeAndNil(qAux)
+    TOperacoesConexao.ConfirmaConexao(Conexao);
+    //FreeAndNil(Conexao);
+    FreeAndNil(qAux);
   end;
 
 end;

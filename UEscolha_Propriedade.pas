@@ -87,7 +87,7 @@ var
   FrmEscolha_Propriedade: TFrmEscolha_Propriedade;
 implementation
 
-uses UDM, UPrincipal, ULogin, OperacoesConexao;
+uses UDM, UPrincipal, ULogin, OperacoesConexao, CidadeEntidade;
 
 {$R *.dfm}
 
@@ -110,10 +110,18 @@ end;
 procedure TFrmEscolha_Propriedade.cxButton1Click(Sender: TObject);
 var
   Retorno: AnsiString;
+  FCidade: TCidadeEntidade;
 begin
   FPropriedade:= TPropriedadeEntidade.Create;
+  FCidade:= TCidadeEntidade.Create;
+
+  FCidade.Cidade:= qryPropriedadeCidade.AsString;
+
   FPropriedade.Codigo:= qryPropriedadeCodigo.AsInteger;
   FPropriedade.NomeFazenda:= qryPropriedadeNome.AsString;
+  FPropriedade.Proprietario:= '';
+  FPropriedade.Endereco:= qryPropriedadeEndereco.AsString;
+  FPropriedade.Cidade:= FCidade;
 
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   FrmPrincipal.Create(Self, FPropriedade, FUsuario);

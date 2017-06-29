@@ -5612,7 +5612,7 @@
       object RibbonGroup6: TRibbonGroup
         Left = 4
         Top = 3
-        Width = 254
+        Width = 399
         Height = 86
         Cursor = crHandPoint
         ActionManager = ActionManager1
@@ -5716,7 +5716,13 @@
           Item = dxNavBarRelEstoqueGrao
         end
         item
-          Item = dxNavBarEstoqueProduto
+          Item = dxNavBarRelEstoqueProduto
+        end
+        item
+          Item = dxNavBarRelLancamento_Financeiro
+        end
+        item
+          Item = dxNavBarRel_Manutencao_Maquina
         end>
     end
     object dxNavBarDicaFinanceiro: TdxNavBarItem
@@ -5740,8 +5746,14 @@
     object dxNavBarRelEstoqueGrao: TdxNavBarItem
       Action = acRel_Estoque_Grao
     end
-    object dxNavBarEstoqueProduto: TdxNavBarItem
+    object dxNavBarRelEstoqueProduto: TdxNavBarItem
       Action = acRel_Estoque_Produto
+    end
+    object dxNavBarRelLancamento_Financeiro: TdxNavBarItem
+      Action = acRel_Lancamento_Financeiro
+    end
+    object dxNavBarRel_Manutencao_Maquina: TdxNavBarItem
+      Action = acRel_Manutencao_Maquina
     end
   end
   object ActionManager1: TActionManager
@@ -6069,6 +6081,12 @@
       item
         Items = <
           item
+            Action = acRel_Lancamento_Financeiro
+            Caption = '&Lan'#231'amentos Financeiros'
+            ImageIndex = 110
+            CommandProperties.ButtonSize = bsLarge
+          end
+          item
             Action = acConsulta_Atividades
             Caption = '&Atividades'
             ImageIndex = 23
@@ -6088,7 +6106,13 @@
           end
           item
             Action = acRel_Estoque_Produto
+            Caption = 'E&stoque de Produtos'
             ImageIndex = 84
+            CommandProperties.ButtonSize = bsLarge
+          end
+          item
+            Action = acRel_Manutencao_Maquina
+            ImageIndex = 85
             CommandProperties.ButtonSize = bsLarge
           end>
         ActionBar = RibbonGroup6
@@ -6320,6 +6344,24 @@
             CommandProperties.ButtonSize = bsLarge
           end>
         ActionBar = RibbonGroup4
+      end
+      item
+        Items = <
+          item
+            Caption = '&ActionClientItem0'
+          end>
+      end
+      item
+        Items = <
+          item
+            Caption = '&ActionClientItem0'
+          end>
+      end
+      item
+        Items = <
+          item
+            Caption = '&ActionClientItem0'
+          end>
       end
       item
         Items = <
@@ -6617,6 +6659,18 @@
       ImageIndex = 84
       OnExecute = acRel_Estoque_ProdutoExecute
     end
+    object acRel_Lancamento_Financeiro: TAction
+      Category = 'Relat'#243'rios'
+      Caption = 'Lan'#231'amentos Financeiros'
+      ImageIndex = 110
+      OnExecute = acRel_Lancamento_FinanceiroExecute
+    end
+    object acRel_Manutencao_Maquina: TAction
+      Category = 'Relat'#243'rios'
+      Caption = 'Manuten'#231#227'o de M'#225'quinas'
+      ImageIndex = 85
+      OnExecute = acRel_Manutencao_MaquinaExecute
+    end
   end
   object ImageList1: TImageList
     Height = 32
@@ -6624,7 +6678,7 @@
     Left = 656
     Top = 152
     Bitmap = {
-      494C0101EC0018095C0A20002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101EC001809680A20002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008007000001002000000000000000
       0F00000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
