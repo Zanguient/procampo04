@@ -5583,7 +5583,7 @@
       object RibbonGroup3: TRibbonGroup
         Left = 193
         Top = 3
-        Width = 400
+        Width = 385
         Height = 86
         Cursor = crHandPoint
         ActionManager = ActionManager1
@@ -5591,7 +5591,7 @@
         GroupIndex = 1
       end
       object RibbonGroup4: TRibbonGroup
-        Left = 595
+        Left = 580
         Top = 3
         Width = 146
         Height = 86
@@ -5612,7 +5612,7 @@
       object RibbonGroup6: TRibbonGroup
         Left = 4
         Top = 3
-        Width = 399
+        Width = 704
         Height = 86
         Cursor = crHandPoint
         ActionManager = ActionManager1
@@ -5722,7 +5722,22 @@
           Item = dxNavBarRelLancamento_Financeiro
         end
         item
-          Item = dxNavBarRel_Manutencao_Maquina
+          Item = dxNavBarRelManutencao_Maquina
+        end
+        item
+          Item = dxNavBarRelEntrada_Produto
+        end
+        item
+          Item = dxNavBarFolha_Pagamento
+        end
+        item
+          Item = dxNavBarRelContrato
+        end
+        item
+          Item = dxNavBarRelVenda_Grao
+        end
+        item
+          Item = dxNavBarRelDados_Climaticos
         end>
     end
     object dxNavBarDicaFinanceiro: TdxNavBarItem
@@ -5752,8 +5767,23 @@
     object dxNavBarRelLancamento_Financeiro: TdxNavBarItem
       Action = acRel_Lancamento_Financeiro
     end
-    object dxNavBarRel_Manutencao_Maquina: TdxNavBarItem
+    object dxNavBarRelManutencao_Maquina: TdxNavBarItem
       Action = acRel_Manutencao_Maquina
+    end
+    object dxNavBarRelEntrada_Produto: TdxNavBarItem
+      Action = acRel_Entrada_Produto
+    end
+    object dxNavBarFolha_Pagamento: TdxNavBarItem
+      Action = acRel_Folha_Pagamento
+    end
+    object dxNavBarRelContrato: TdxNavBarItem
+      Action = acRel_Contrato
+    end
+    object dxNavBarRelVenda_Grao: TdxNavBarItem
+      Action = acRel_Venda_Grao
+    end
+    object dxNavBarRelDados_Climaticos: TdxNavBarItem
+      Action = acRel_Dados_Climaticos
     end
   end
   object ActionManager1: TActionManager
@@ -6093,6 +6123,11 @@
             CommandProperties.ButtonSize = bsLarge
           end
           item
+            Action = acRel_Dados_Climaticos
+            ImageIndex = 50
+            CommandProperties.ButtonSize = bsLarge
+          end
+          item
             Action = acRel_Visao_Geral_Safra
             Caption = '&Vis'#227'o Geral da Safra'
             ImageIndex = 193
@@ -6111,7 +6146,32 @@
             CommandProperties.ButtonSize = bsLarge
           end
           item
+            Action = acRel_Contrato
+            Caption = '&Contratos'
+            ImageIndex = 24
+            CommandProperties.ButtonSize = bsLarge
+          end
+          item
+            Action = acRel_Venda_Grao
+            Caption = 'Ven&das de Gr'#227'os'
+            ImageIndex = 137
+            CommandProperties.ButtonSize = bsLarge
+          end
+          item
+            Action = acRel_Entrada_Produto
+            Caption = 'E&ntrada de Produtos'
+            ImageIndex = 92
+            CommandProperties.ButtonSize = bsLarge
+          end
+          item
+            Action = acRel_Folha_Pagamento
+            Caption = '&Folha de Pagamento'
+            ImageIndex = 212
+            CommandProperties.ButtonSize = bsLarge
+          end
+          item
             Action = acRel_Manutencao_Maquina
+            Caption = '&Manuten'#231#227'o de M'#225'quinas'
             ImageIndex = 85
             CommandProperties.ButtonSize = bsLarge
           end>
@@ -6275,7 +6335,7 @@
         Items = <
           item
             Action = acVenda
-            Caption = '&Faturamento de Contratos'
+            Caption = '&Vendas de Gr'#227'os'
             ImageIndex = 78
             CommandProperties.ButtonSize = bsLarge
           end
@@ -6344,6 +6404,12 @@
             CommandProperties.ButtonSize = bsLarge
           end>
         ActionBar = RibbonGroup4
+      end
+      item
+        Items = <
+          item
+            Caption = '&ActionClientItem0'
+          end>
       end
       item
         Items = <
@@ -6505,7 +6571,7 @@
     end
     object acVenda: TAction
       Category = 'Movimenta'#231#245'es'
-      Caption = 'Faturamento de Contratos'
+      Caption = 'Vendas de Gr'#227'os'
       ImageIndex = 78
       OnExecute = acVendaExecute
     end
@@ -6671,6 +6737,36 @@
       ImageIndex = 85
       OnExecute = acRel_Manutencao_MaquinaExecute
     end
+    object acRel_Entrada_Produto: TAction
+      Category = 'Relat'#243'rios'
+      Caption = 'Entrada de Produtos'
+      ImageIndex = 92
+      OnExecute = acRel_Entrada_ProdutoExecute
+    end
+    object acRel_Folha_Pagamento: TAction
+      Category = 'Relat'#243'rios'
+      Caption = 'Folha de Pagamento'
+      ImageIndex = 212
+      OnExecute = acRel_Folha_PagamentoExecute
+    end
+    object acRel_Contrato: TAction
+      Category = 'Relat'#243'rios'
+      Caption = 'Contratos'
+      ImageIndex = 24
+      OnExecute = acRel_ContratoExecute
+    end
+    object acRel_Venda_Grao: TAction
+      Category = 'Relat'#243'rios'
+      Caption = 'Vendas de Gr'#227'os'
+      ImageIndex = 137
+      OnExecute = acRel_Venda_GraoExecute
+    end
+    object acRel_Dados_Climaticos: TAction
+      Category = 'Relat'#243'rios'
+      Caption = 'Dados Clim'#225'ticos'
+      ImageIndex = 50
+      OnExecute = acRel_Dados_ClimaticosExecute
+    end
   end
   object ImageList1: TImageList
     Height = 32
@@ -6678,7 +6774,7 @@
     Left = 656
     Top = 152
     Bitmap = {
-      494C0101EC001809680A20002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101EC0018096C0A20002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008007000001002000000000000000
       0F00000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

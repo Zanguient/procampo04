@@ -32,7 +32,8 @@ uses
   UFolha_Pagamento, dxSkinsdxNavBarPainter, dxNavBarCollns, cxClasses,
   dxNavBarBase, dxNavBar, dxNavBarGroupItems, UDica_Financeiro, UDica_Estoque, UDica_Cadastro,
   URel_Visao_Geral, URel_Estoque_Grao, URel_Estoque_Produto, URel_Lancamento_Financeiro,
-  Vcl.StdCtrls, URel_Manutencao_Maquina;
+  Vcl.StdCtrls, URel_Manutencao_Maquina, URel_Entrada_Produto, URel_Folha_Pagamento,
+  URel_Contrato, URel_Contrato_Venda, URel_Clima;
 
 type
   TFrmPrincipal = class(TForm)
@@ -117,7 +118,17 @@ type
     acRel_Lancamento_Financeiro: TAction;
     dxNavBarRelLancamento_Financeiro: TdxNavBarItem;
     acRel_Manutencao_Maquina: TAction;
-    dxNavBarRel_Manutencao_Maquina: TdxNavBarItem;
+    dxNavBarRelManutencao_Maquina: TdxNavBarItem;
+    acRel_Entrada_Produto: TAction;
+    dxNavBarRelEntrada_Produto: TdxNavBarItem;
+    acRel_Folha_Pagamento: TAction;
+    dxNavBarFolha_Pagamento: TdxNavBarItem;
+    acRel_Contrato: TAction;
+    dxNavBarRelContrato: TdxNavBarItem;
+    acRel_Venda_Grao: TAction;
+    dxNavBarRelVenda_Grao: TdxNavBarItem;
+    acRel_Dados_Climaticos: TAction;
+    dxNavBarRelDados_Climaticos: TdxNavBarItem;
     procedure acCadastro_CidadeExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure acCadastro_AtividadeExecute(Sender: TObject);
@@ -162,6 +173,11 @@ type
     procedure acRel_Lancamento_FinanceiroExecute(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure acRel_Manutencao_MaquinaExecute(Sender: TObject);
+    procedure acRel_Entrada_ProdutoExecute(Sender: TObject);
+    procedure acRel_Folha_PagamentoExecute(Sender: TObject);
+    procedure acRel_ContratoExecute(Sender: TObject);
+    procedure acRel_Venda_GraoExecute(Sender: TObject);
+    procedure acRel_Dados_ClimaticosExecute(Sender: TObject);
   private
     Op: TOperacoes;
     FPropriedade: TPropriedadeEntidade;
@@ -428,6 +444,31 @@ begin
   Op.CentralizaForm(FrmRegistro_Atividade, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
 end;
 
+procedure TFrmPrincipal.acRel_ContratoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRel_Contrato, FrmRel_Contrato);
+  FrmRel_Contrato.Create(FPropriedade, FUsuario);
+  FrmRel_Contrato.Show;
+  Op.CentralizaForm(FrmRel_Contrato, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acRel_Dados_ClimaticosExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRel_Clima, FrmRel_Clima);
+  FrmRel_Clima.Create(FPropriedade, FUsuario);
+  FrmRel_Clima.Show;
+  Op.CentralizaForm(FrmRel_Clima, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+
+end;
+
+procedure TFrmPrincipal.acRel_Entrada_ProdutoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRel_Entrada_Produto, FrmRel_Entrada_Produto);
+  FrmRel_Entrada_Produto.Create(FPropriedade, FUsuario);
+  FrmRel_Entrada_Produto.Show;
+  Op.CentralizaForm(FrmRel_Entrada_Produto, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
 procedure TFrmPrincipal.acRel_Estoque_GraoExecute(Sender: TObject);
 begin
   Application.CreateForm(TFrmRel_Estoque_Grao, FrmRel_Estoque_Grao);
@@ -445,6 +486,14 @@ begin
   Op.CentralizaForm(FrmRel_Estoque_Produto, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
 end;
 
+procedure TFrmPrincipal.acRel_Folha_PagamentoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRel_Folha_Pagamento, FrmRel_Folha_Pagamento);
+  FrmRel_Folha_Pagamento.Create(FPropriedade, FUsuario);
+  FrmRel_Folha_Pagamento.Show;
+  Op.CentralizaForm(FrmRel_Folha_Pagamento, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
 procedure TFrmPrincipal.acRel_Lancamento_FinanceiroExecute(Sender: TObject);
 begin
   Application.CreateForm(TFrmRel_Lancamento_Financeiro, FrmRel_Lancamento_Financeiro);
@@ -459,6 +508,14 @@ begin
   FrmRel_Manutencao_Maquina.Create(FPropriedade, FUsuario);
   FrmRel_Manutencao_Maquina.Show;
   Op.CentralizaForm(FrmRel_Manutencao_Maquina, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
+end;
+
+procedure TFrmPrincipal.acRel_Venda_GraoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrmRel_Contrato_Venda, FrmRel_Contrato_Venda);
+  FrmRel_Contrato_Venda.Create(FPropriedade, FUsuario);
+  FrmRel_Contrato_Venda.Show;
+  Op.CentralizaForm(FrmRel_Contrato_Venda, FrmPrincipal, Ribbon1.Height, StbStatus.Height);
 end;
 
 procedure TFrmPrincipal.acRel_Visao_Geral_SafraExecute(Sender: TObject);
